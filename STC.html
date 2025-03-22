@@ -167,6 +167,33 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1rem;
     }
+    
+    .server-list li {
+      padding: 1rem;
+      background: var(--container-bg);
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      border-left: 3px solid var(--primary-color);
+    }
+
+    .server-list li.active {
+      border-left-color: #4CAF50;
+      background-color: rgba(76, 175, 80, 0.1);
+    }
+
+    .server-list li.failed {
+      border-left-color: #f44336;
+      background-color: rgba(244, 67, 54, 0.1);
+    }
+
+    .server-list li i {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
 
     .error-message {
       color: #ff4444;
@@ -175,7 +202,89 @@
       display: none;
     }
 
-    /* باقي الستايلات كما هي مع التعديلات المطلوبة */
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem 0;
+      padding: 0.75rem;
+      border-radius: var(--border-radius);
+      background: var(--container-bg);
+      box-shadow: var(--shadow);
+    }
+
+    .status-indicator .spinner {
+      margin-left: 0.5rem;
+      animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .contact-button {
+      display: block;
+      width: fit-content;
+      margin: 2rem auto 0;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(106, 27, 154, 0.3);
+    }
+
+    .contact-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(106, 27, 154, 0.4);
+    }
+
+    .contact-button i {
+      margin-right: 0.5rem;
+    }
+    
+    .retry-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1.5rem;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .retry-button:hover {
+      background: var(--primary-light);
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+      #speedTestIframe {
+        height: 400px;
+      }
+      .countdown-circle {
+        width: 150px;
+        height: 150px;
+        font-size: 3rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .server-list ul {
+        grid-template-columns: 1fr;
+      }
+      #speedTestIframe {
+        height: 350px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -186,12 +295,17 @@
       <div class="countdown-circle" id="countdown">5</div>
     </div>
 
+    <div class="status-indicator" id="statusIndicator">
+      <i class="fas fa-sync-alt spinner"></i>
+      <span id="statusText">جاري التحقق من الخوادم المتاحة...</span>
+    </div>
+
     <div class="speedtest-section">
       <div class="server-header">
         <i class="fas fa-tachometer-alt"></i>
         <h3>اختبار السرعة الحي</h3>
         <div class="server-counter">
-          <span id="current-server">1</span>/7
+          <span id="current-server">-</span>/<span id="total-servers">0</span>
         </div>
       </div>
       <iframe id="speedTestIframe" 
@@ -204,16 +318,14 @@
 
     <div class="server-list">
       <h3><i class="fas fa-server"></i> الخوادم المستخدمة</h3>
-      <ul>
-        <li><i class="fas fa-link"></i> speedtest.stc.com.sa</li>
-        <li><i class="fas fa-link"></i> speedtest1.stc.com.sa</li>
-        <li><i class="fas fa-link"></i> speedtest.medu.sa</li>
-        <li><i class="fas fa-link"></i> speedtest.nour.net.sa</li>
-        <li><i class="fas fa-link"></i> speedtest.mobily.com.sa</li>
-        <li><i class="fas fa-link"></i> ookla1.zain.com.sa</li>
-        <li><i class="fas fa-link"></i> speedtest.go.com.kw</li>
+      <ul id="serverList">
+        <!-- Server list will be populated by JavaScript -->
       </ul>
     </div>
+
+    <button class="retry-button" id="retryButton">
+      <i class="fas fa-redo"></i> إعادة المحاولة مع جميع الخوادم
+    </button>
 
     <a href="https://t.me/jljal/" class="contact-button" rel="noopener noreferrer">
       للتواصل <i class="fab fa-telegram"></i>
@@ -222,72 +334,226 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // العد التنازلي
-      let countdown = 5;
-      const countdownElement = document.getElementById('countdown');
-      const updateCountdown = () => {
-        countdownElement.textContent = countdown;
-        if(countdown <= 0) window.location.href = 'STC.html';
-        countdown--;
-      }
-      setInterval(updateCountdown, 1000);
-
-      // إعدادات اختبار السرعة
-      const servers = [
-        'speedtest.stc.com.sa',
-        'speedtest1.stc.com.sa',
-        'speedtest.medu.sa',
-        'speedtest.nour.net.sa',
-        'speedtest.mobily.com.sa',
-        'ookla1.zain.com.sa',
-        'speedtest.go.com.kw'
+      // Server configuration with multiple protocols and ports
+      const serverConfigs = [
+        // STC servers
+        { name: 'speedtest.stc.com.sa', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
+        { name: 'speedtest1.stc.com.sa', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
+        // Other ISP servers
+        { name: 'speedtest.medu.sa', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
+        { name: 'speedtest.nour.net.sa', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
+        { name: 'speedtest.mobily.com.sa', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
+        { name: 'ookla1.zain.com.sa', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
+        { name: 'speedtest.go.com.kw', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
+        // Global fallback servers
+        { name: 'speedtest.net', protocols: ['https://'], ports: [''] },
+        { name: 'fast.com', protocols: ['https://'], ports: [''] }
       ];
 
-      let currentServerIndex = 0;
+      // Elements
       const iframe = document.getElementById('speedTestIframe');
       const errorMsg = document.getElementById('errorMsg');
-
-      const checkServerAvailability = (url, callback) => {
-        const img = new Image();
-        img.onload = () => callback(true);
-        img.onerror = () => callback(false);
-        img.src = `http://${url}/image.jpg?${Date.now()}`;
-      }
-
-      const loadNextServer = () => {
-        errorMsg.style.display = 'none';
-        const server = servers[currentServerIndex];
-        
-        checkServerAvailability(server, (available) => {
-          if(available) {
-            iframe.src = `http://${server}/`;
-            document.getElementById('current-server').textContent = currentServerIndex + 1;
-          } else {
-            errorMsg.textContent = `الخادم ${server} غير متاح - جارٍ التحميل التالي...`;
-            errorMsg.style.display = 'block';
-            currentServerIndex = (currentServerIndex + 1) % servers.length;
-            setTimeout(loadNextServer, 1500);
+      const statusIndicator = document.getElementById('statusIndicator');
+      const statusText = document.getElementById('statusText');
+      const serverList = document.getElementById('serverList');
+      const retryButton = document.getElementById('retryButton');
+      const currentServerElement = document.getElementById('current-server');
+      const totalServersElement = document.getElementById('total-servers');
+      
+      // Variables
+      let availableServers = [];
+      let currentServerIndex = 0;
+      let isCheckingServers = false;
+      let countdown = 5;
+      let countdownInterval;
+      let serverSwitchInterval;
+      
+      // Countdown function
+      const countdownElement = document.getElementById('countdown');
+      const startCountdown = () => {
+        countdownInterval = setInterval(() => {
+          countdownElement.textContent = countdown;
+          countdown--;
+          
+          if (countdown < 0) {
+            clearInterval(countdownInterval);
+            if (availableServers.length > 0) {
+              loadServer(availableServers[0]);
+            } else {
+              checkAllServers();
+            }
           }
+        }, 1000);
+      };
+      
+      // Populate server list UI
+      const populateServerList = () => {
+        serverList.innerHTML = '';
+        serverConfigs.forEach(server => {
+          const li = document.createElement('li');
+          li.id = `server-${server.name.replace(/\./g, '-')}`;
+          li.innerHTML = `<i class="fas fa-server"></i> ${server.name}`;
+          serverList.appendChild(li);
         });
-      }
-
+        totalServersElement.textContent = serverConfigs.length;
+      };
+      
+      // Check a single server with multiple protocol/port combinations
+      const checkServer = async (server) => {
+        const serverElement = document.getElementById(`server-${server.name.replace(/\./g, '-')}`);
+        
+        for (const protocol of server.protocols) {
+          for (const port of server.ports) {
+            const url = `${protocol}${server.name}${port}`;
+            try {
+              // Use fetch with timeout to check server availability
+              const controller = new AbortController();
+              const timeoutId = setTimeout(() => controller.abort(), 5000);
+              
+              const response = await fetch(url, { 
+                mode: 'no-cors', 
+                signal: controller.signal
+              });
+              
+              clearTimeout(timeoutId);
+              
+              // If we got here, the server is probably available
+              availableServers.push({
+                name: server.name,
+                url: url
+              });
+              
+              if (serverElement) {
+                serverElement.classList.add('active');
+                serverElement.innerHTML = `<i class="fas fa-check-circle"></i> ${server.name} (متاح)`;
+              }
+              
+              return true;
+            } catch (err) {
+              // Continue to next combination
+              continue;
+            }
+          }
+        }
+        
+        // If we get here, all combinations failed
+        if (serverElement) {
+          serverElement.classList.add('failed');
+          serverElement.innerHTML = `<i class="fas fa-times-circle"></i> ${server.name} (غير متاح)`;
+        }
+        
+        return false;
+      };
+      
+      // Check all servers
+      const checkAllServers = async () => {
+        if (isCheckingServers) return;
+        
+        isCheckingServers = true;
+        availableServers = [];
+        statusIndicator.style.display = 'flex';
+        errorMsg.style.display = 'none';
+        statusText.textContent = 'جاري التحقق من الخوادم المتاحة...';
+        
+        populateServerList();
+        
+        for (const server of serverConfigs) {
+          await checkServer(server);
+        }
+        
+        if (availableServers.length > 0) {
+          statusText.textContent = `تم العثور على ${availableServers.length} خوادم متاحة`;
+          currentServerIndex = 0;
+          loadServer(availableServers[0]);
+          startServerSwitching();
+        } else {
+          statusText.textContent = 'لم يتم العثور على خوادم متاحة. يرجى المحاولة مرة أخرى أو استخدام شبكة مختلفة.';
+          errorMsg.textContent = 'جميع الخوادم غير متاحة حالياً';
+          errorMsg.style.display = 'block';
+          iframe.src = '';
+        }
+        
+        isCheckingServers = false;
+      };
+      
+      // Load a server in the iframe
+      const loadServer = (server) => {
+        statusText.textContent = `جاري تحميل ${server.name}...`;
+        errorMsg.style.display = 'none';
+        iframe.style.opacity = '0.5';
+        
+        setTimeout(() => {
+          try {
+            iframe.src = server.url;
+            currentServerElement.textContent = availableServers.indexOf(server) + 1;
+            iframe.style.opacity = '1';
+            
+            // Update UI
+            document.querySelectorAll('#serverList li').forEach(li => {
+              li.classList.remove('active', 'current');
+            });
+            
+            const serverElement = document.getElementById(`server-${server.name.replace(/\./g, '-')}`);
+            if (serverElement) {
+              serverElement.classList.add('active', 'current');
+            }
+            
+            statusText.textContent = `تم تحميل ${server.name} بنجاح`;
+          } catch (error) {
+            errorMsg.textContent = `فشل في تحميل ${server.name}: ${error.message}`;
+            errorMsg.style.display = 'block';
+            nextServer();
+          }
+        }, 1000);
+      };
+      
+      // Move to next server
+      const nextServer = () => {
+        if (availableServers.length === 0) return;
+        
+        currentServerIndex = (currentServerIndex + 1) % availableServers.length;
+        loadServer(availableServers[currentServerIndex]);
+      };
+      
+      // Start automatic server switching
+      const startServerSwitching = () => {
+        if (serverSwitchInterval) clearInterval(serverSwitchInterval);
+        
+        serverSwitchInterval = setInterval(() => {
+          if (availableServers.length > 1) {
+            nextServer();
+          }
+        }, 15000); // Switch every 15 seconds
+      };
+      
+      // Handle iframe load events
       iframe.addEventListener('load', () => {
         iframe.style.opacity = '1';
-        currentServerIndex = (currentServerIndex + 1) % servers.length;
+        statusText.textContent = `تم تحميل ${availableServers[currentServerIndex]?.name || 'الخادم'} بنجاح`;
       });
-
+      
+      // Handle iframe error events
       iframe.addEventListener('error', () => {
-        errorMsg.textContent = 'فشل في الاتصال بالخادم - جارٍ المحاولة التالية...';
+        errorMsg.textContent = 'فشل في تحميل الخادم - جاري المحاولة التالية...';
         errorMsg.style.display = 'block';
-        currentServerIndex = (currentServerIndex + 1) % servers.length;
-        setTimeout(loadNextServer, 2000);
+        nextServer();
       });
-
-      // بدء التشغيل الأولي
-      loadNextServer();
-      setInterval(() => {
-        if(!iframe.src.includes(servers[currentServerIndex])) loadNextServer();
-      }, 7000);
+      
+      // Retry button click handler
+      retryButton.addEventListener('click', () => {
+        checkAllServers();
+      });
+      
+      // Initialize
+      populateServerList();
+      startCountdown();
+      
+      // After countdown finishes, check servers
+      setTimeout(() => {
+        if (availableServers.length === 0) {
+          checkAllServers();
+        }
+      }, 5500);
     });
   </script>
 </body>
