@@ -291,9 +291,7 @@
   <div class="container">
     <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة</h1>
     
-    <div class="countdown-container">
-      <div class="countdown-circle" id="countdown">5</div>
-    </div>
+    
 
     <div class="status-indicator" id="statusIndicator">
       <i class="fas fa-sync-alt spinner"></i>
@@ -336,18 +334,29 @@
     document.addEventListener('DOMContentLoaded', () => {
       // Server configuration with multiple protocols and ports
       const serverConfigs = [
-  { name: 'speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] },
-  { name: 'dam-speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] },
-  { name: 'jed-speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] },
+  // الخوادم التي تعمل بمنفذ 8080
+  { 
+    name: 'speedtest.saudi.net.sa',
+    protocols: ['https://', 'http://'], 
+    ports: [':8080', ''] 
+  },
+  { 
+    name: 'dam-speedtest.saudi.net.sa',
+    protocols: ['https://', 'http://'], 
+    ports: [':8080', ''] 
+  },
+  { 
+    name: 'jed-speedtest.saudi.net.sa',
+    protocols: ['https://', 'http://'], 
+    ports: [':8080', ''] 
+  },
+
+  // تعديل خاص لخادم Ookla الرسمي
   { 
     name: 'speedtest.saudi.net.sa.prod.hosts.ooklaserver.net',
-    protocols: ['https://', 'http://'], 
-    ports: [':8080'] 
-  },
-  { name: 'riy-speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] },
-  { name: 'med-speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] },
-  { name: 'tab-speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] },
-  { name: 'abh-speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] }
+    protocols: ['https://'], // البروتوكول الإجباري
+    ports: [':8080'] // المنفذ الإجباري
+  }
 ];
 
       // Elements
