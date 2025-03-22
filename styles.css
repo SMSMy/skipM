@@ -1,0 +1,48 @@
+/* تنسيق عام للصفحة */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #77b;
+  font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+  color: #000;
+}
+
+/* تنسيق الهيدر */
+header {
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+/* تنسيق قائمة التنقل */
+nav ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  background-color: #ccd;
+}
+
+nav ul li {
+  display: inline-block;
+  margin: 10px;
+}
+
+nav ul li a {
+  font-weight: bold;
+  color: #448;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* تنسيق الفوتر */
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ccd;
+}
