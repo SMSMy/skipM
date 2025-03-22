@@ -2,220 +2,345 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="5; URL=ZAIN.html">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>تخطي تحديد السرعة لـ Zain KSA</title>
-    <link href="../../fonts.googleapis.com/css2fd45.css?family=Cairo:wght@400;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #f0f2f5;
+            --bg-color: #f5f7fa;
             --container-bg: #ffffff;
-            --text-color: #333;
-            --heading-color: #2c3e50;
-            --primary-color: #527e1f; /* اللون الرئيسي الجديد */
-            --primary-hover: #426a1a; /* تدرج داكن */
-            --shadow-color: rgba(82, 126, 31, 0.1); /* ظلال خضراء */
+            --text-color: #2d3748;
+            --heading-color: #1a202c;
+            --primary-color: #527e1f;
+            --primary-light: #6a9d2a;
+            --primary-dark: #3a5a16;
+            --border-radius: 12px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-color: #1a1a1a;
-                --container-bg: #2c2c2c;
-                --text-color: #e0e0e0;
-                --heading-color: #ffffff;
-                --primary-color: #5c8f22; /* تدرج أغمق للوضع الليلي */
-                --primary-hover: #4c751d;
-                --shadow-color: rgba(106, 156, 41, 0.1);
+                --bg-color: #121212;
+                --container-bg: #1e1e1e;
+                --text-color: #e2e8f0;
+                --heading-color: #f7fafc;
+                --primary-color: #5c8f22;
+                --primary-light: #74a83a;
+                --primary-dark: #44691b;
+                --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
             }
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-
-        body, html {
-            height: 100%;
-            overflow: hidden;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: Cairo, sans-serif;
+            font-family: 'Cairo', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .container {
-            width: 100%;
-            margin: 0 auto;
-            background-color: var(--container-bg);
-            flex-grow: 1;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-
-        h1, h2 {
-            text-align: center;
-            color: var(--heading-color);
-            margin-bottom: 20px;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 2rem;
         }
 
         .notification-bar {
-            background-color: #527e1f; /* اللون الجديد */
-            color: #fff;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
             text-align: center;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: 700;
-            position: sticky;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+            padding: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(82, 126, 31, 0.3);
+            position: relative;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--container-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        h1, h2, h3 {
+            color: var(--heading-color);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-top: 0.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-light), var(--primary-dark));
+            border-radius: 3px;
         }
 
         .countdown-container {
-            text-align: center;
-            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
         }
 
         .countdown-circle {
-            width: 120px;
-            height: 120px;
-            background-color: var(--primary-color);
-            color: #fff;
-            border-radius: 50%;
-            font-size: 36px;
-            line-height: 120px;
-            margin: 0 auto;
-            box-shadow: 0 0 10px rgba(82, 126, 31, 0.5);
-        }
-
-        .ad-container {
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .links {
             display: flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-
-        .links a {
-            margin: 5px;
-            padding: 10px 15px;
-            background-color: var(--primary-color);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color .3s;
-        }
-
-        .links a:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .telegram-link {
-            display: block;
-            text-align: center;
-            margin: 20px 0;
-            color: var(--primary-color);
-            text-decoration: none;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            font-size: 3.5rem;
             font-weight: 700;
+            border-radius: 50%;
+            box-shadow: 0 10px 20px rgba(82, 126, 31, 0.3);
+            position: relative;
         }
 
-        .telegram-link i {
-            margin-left: 5px;
+        .countdown-circle::before {
+            content: "";
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            animation: rotate 10s linear infinite;
         }
 
-        @media (max-width: 600px) {
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .provider-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .provider-card {
+            background: var(--container-bg);
+            border: 1px solid rgba(82, 126, 31, 0.2);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .provider-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(82, 126, 31, 0.2);
+            border-color: var(--primary-light);
+        }
+
+        .provider-card a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            height: 100%;
+        }
+
+        .provider-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .provider-card:hover .icon {
+            transform: scale(1.2);
+            color: var(--primary-light);
+        }
+
+        .server-list {
+            background: rgba(82, 126, 31, 0.05);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 2.5rem 0;
+        }
+
+        .server-list ul {
+            list-style-type: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .server-list li {
+            padding: 1rem;
+            background: var(--container-bg);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .server-list li:hover {
+            box-shadow: 0 5px 10px rgba(82, 126, 31, 0.1);
+            transform: translateX(5px);
+        }
+
+        .server-list li i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .contact-button {
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(82, 126, 31, 0.3);
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(82, 126, 31, 0.4);
+        }
+
+        @media (max-width: 768px) {
             .container {
-                padding: 10px;
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .countdown-circle {
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
             }
 
             h1 {
-                font-size: 24px;
+                font-size: 1.8rem;
             }
-
-            h2 {
-                font-size: 18px;
-            }
-        }
-
-        .none {
-            display: none;
         }
     </style>
 </head>
 <body>
     <div class="notification-bar">
-        <i class="fas fa-info-circle"></i> مع تحيات يزيد❤️
+        <i class="fas fa-heart"></i> مع تحيات يزيد ❤️
     </div>
+    
     <div class="container">
         <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ Zain KSA</h1>
-      <h2><i class="fas fa-sync-alt"></i> الرجاء ترك الصفحة مفتوحة و سيتم تحديث الصفحة كل 5 ثواني</h2>
-<div class="countdown-container">
-    <div class="countdown-circle" id="countdown">5</div>
+        <h2><i class="fas fa-sync-alt"></i> الرجاء ترك الصفحة مفتوحة - التحديث التلقائي كل 5 ثوانٍ</h2>
+
+        <div class="countdown-container">
+            <div class="countdown-circle" id="countdown">5</div>
         </div>
-      <div class="links">
-            <a href="STC.html">تخطي STC</a>
-            <a href="MOBILY.html">تخطي Mobily</a>
-            <a href="ZAIN.html">تخطي Zain</a>
-            <a href="ITC.html">تخطي ITC</a>
-            <a href="GO.html">تخطي GO</a>
+
+        <div class="provider-grid">
+            <div class="provider-card">
+                <a href="STC.html">
+                    <div class="icon"><i class="fas fa-bolt"></i></div>
+                    <div class="name">STC</div>
+                </a>
+            </div>
+            <div class="provider-card">
+                <a href="MOBILY.html">
+                    <div class="icon"><i class="fas fa-wifi"></i></div>
+                    <div class="name">Mobily</div>
+                </a>
+            </div>
+            <div class="provider-card">
+                <a href="ZAIN.html">
+                    <div class="icon"><i class="fas fa-signal"></i></div>
+                    <div class="name">Zain</div>
+                </a>
+            </div>
+            <div class="provider-card">
+                <a href="ITC.html">
+                    <div class="icon"><i class="fas fa-network-wired"></i></div>
+                    <div class="name">ITC</div>
+                </a>
+            </div>
+            <div class="provider-card">
+                <a href="GO.html">
+                    <div class="icon"><i class="fas fa-rocket"></i></div>
+                    <div class="name">GO</div>
+                </a>
+            </div>
         </div>
-      <p> <a href="https://t.me/jljal/" class="telegram-link"> <em></em><em> للتواصل📲 </em></a> </p>
-		
-  <h2 style="font-size: 16px; font-weight: normal; background: none !important; border: none; box-shadow: none;">
-  <i class="fas fa-sync-alt" style="margin-left: 8px;"></i> 
-  الخوادم المستخدمة
-</h2>
 
-<h2 style="font-size: 16px; font-weight: normal; background: none !important; border: none; box-shadow: none;">
-  <i class="fas fa-sync-alt" style="margin-left: 8px;"></i> 
-  https://speedtest-dammamnew.sa.zain.com.prod.hosts.ooklaserver.net:8080/speedtest/upload.php
-</h2>
+        <div class="server-list">
+            <h3><i class="fas fa-server"></i> الخوادم المستخدمة</h3>
+            <ul>
+                <li><i class="fas fa-link"></i>speedtest-dammamnew.sa.zain.com.prod.hosts.ooklaserver.net:8080</li>
+                <li><i class="fas fa-link"></i>server-6419.prod.hosts.ooklaserver.net:8080</li>
+                <li><i class="fas fa-link"></i>speedtest-dammamnew.sa.zain.com:8080</li>
+            </ul>
+        </div>
 
-<h2 style="font-size: 16px; font-weight: normal; background: none !important; border: none; box-shadow: none;">
-  https://server-6419.prod.hosts.ooklaserver.net:8080/speedtest/upload.php
-</h2>
+        <a href="https://t.me/jljal/" class="contact-button">
+            للتواصل <i class="fab fa-telegram"></i>
+        </a>
+    </div>
 
-<h2 style="font-size: 16px; font-weight: normal; background: none !important; border: none; box-shadow: none;">
-  http://speedtest-dammamnew.sa.zain.com:8080/speedtest/upload.php
-</h2>
-
-<h2 style="font-size: 16px; font-weight: normal; background: none !important; border: none; box-shadow: none;">
-  https://speedtest-dammamnew.sa.zain.com.prod.hosts.ooklaserver.net:8080/speedtest/upload.php
-</h2>
-
-
-
-<p>&nbsp;</p>
-<iframe class="none" src="https://speedtest-dammamnew.sa.zain.com.prod.hosts.ooklaserver.net:8080/speedtest/upload.php"></iframe>
-    <iframe class="none" src="https://server-6419.prod.hosts.ooklaserver.net:8080/speedtest/upload.php"></iframe>
-    <iframe class="none"  src="https://speedtest-dammamnew.sa.zain.com.prod.hosts.ooklaserver.net:8080/speedtest/upload.php"></iframe>
-    <iframe class="none" src="https://server-6419.prod.hosts.ooklaserver.net:8080/speedtest/upload.php"></iframe> 
-<iframe class="none" src="http://speedtest-dammamnew.sa.zain.com:8080/speedtest/upload.php"></iframe>
     <script>
-        let countdown = 6;
-        const countdownDisplay = document.getElementById("countdown");
-
+        let countdown = 5;
+        const countdownElement = document.getElementById('countdown');
+        
         function updateCountdown() {
-            countdown--;
-            countdownDisplay.textContent = countdown;
-            if (countdown <= 0) {
-                clearInterval(countdownInterval);
-                countdownDisplay.textContent = "انتهى";
+            countdownElement.textContent = countdown;
+            
+            if(countdown <= 0) {
+                window.location.href = 'ZAIN.html';
+                return;
             }
+            
+            countdownElement.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                countdownElement.style.transform = 'scale(1)';
+            }, 200);
+            
+            countdown--;
         }
 
-        updateCountdown();
-        const countdownInterval = setInterval(updateCountdown, 1000);
+        window.addEventListener('DOMContentLoaded', () => {
+            setInterval(updateCountdown, 1000);
+        });
+
+        document.querySelectorAll('.provider-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('.icon i');
+                icon.classList.add('fa-beat');
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('.icon i');
+                icon.classList.remove('fa-beat');
+            });
+        });
     </script>
 </body>
 </html>
