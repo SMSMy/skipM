@@ -1,197 +1,418 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="5; URL=ITC.html">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>تخطي تحديد السرعة لـ ITC</title>
-    <link href="../../fonts.googleapis.com/css2fd45.css?family=Cairo:wght@400;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-color: #f0f2f5;
-            --container-bg: #ffffff;
-            --text-color: #333;
-            --heading-color: #2c3e50;
-            --primary-color: #3498db;
-            --primary-hover: #2980b9;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تخطي تحديد السرعة لـ ITC</title>
+  <!-- الخطوط والأيقونات -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-color: #f5f7fa;
+      --container-bg: #ffffff;
+      --text-color: #2d3748;
+      --heading-color: #1a202c;
+      /* الألوان الأساسية باستخدام اللون المطلوب */
+      --primary-color: #00b03e;
+      --primary-light: #33c55d;
+      --primary-dark: #008c2c;
+      --accent-color: #009c35;
+      --border-radius: 12px;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s ease;
+    }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #1a1a1a;
-                --container-bg: #2c2c2c;
-                --text-color: #e0e0e0;
-                --heading-color: #ffffff;
-                --primary-color: #4a90e2;
-                --primary-hover: #3a7bc8;
-                --shadow-color: rgba(255, 255, 255, 0.1);
-            }
-        }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #121212;
+        --container-bg: #1e1e1e;
+        --text-color: #e2e8f0;
+        --heading-color: #f7fafc;
+        --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+      }
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body, html {
-            height: 100%;
-            overflow: hidden;
-        }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
 
-        body {
-            font-family: Cairo, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-        }
+    /* شريط الإشعار */
+    .notification-bar {
+      background-color: var(--primary-color);
+      color: #fff;
+      text-align: center;
+      padding: 10px 15px;
+      font-size: 1rem;
+      font-weight: 600;
+      width: 100%;
+      border-radius: var(--border-radius);
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
 
-        .container {
-            width: 100%;
-            margin: 0 auto;
-            background-color: var(--container-bg);
-            flex-grow: 1;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      padding: 2rem;
+      background-color: var(--container-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        h1, h2 {
-            text-align: center;
-            color: var(--heading-color);
-            margin-bottom: 20px;
-        }
+    h1, h2, h3 {
+      color: var(--heading-color);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
 
-        .notification-bar {
-            background-color: #8B0000; /* اللون الأحمر القاتم */
-            color: #fff;
-            text-align: center;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: 700;
-            position: sticky;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 0.5rem;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.5rem;
+    }
 
-        .countdown-container {
-            text-align: center;
-            margin: 30px 0;
-        }
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 25%;
+      width: 50%;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary-light), var(--primary-dark));
+      border-radius: 3px;
+    }
 
-        .countdown-circle {
-            width: 120px;
-            height: 120px;
-            background-color: var(--primary-color);
-            color: #fff;
-            border-radius: 50%;
-            font-size: 36px;
-            line-height: 120px;
-            margin: 0 auto;
-            box-shadow: 0 0 10px rgba(52, 152, 219, .5);
-        }
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #555;
+      margin: 1rem 0 2rem;
+    }
 
-        .ad-container {
-            margin: 20px 0;
-            text-align: center;
-        }
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+    }
 
-        .links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
+    .countdown-circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+      color: white;
+      font-size: 4rem;
+      font-weight: 700;
+      border-radius: 50%;
+      box-shadow: 0 10px 20px rgba(0, 176, 62, 0.3);
+      transition: var(--transition);
+      position: relative;
+    }
 
-        .links a {
-            margin: 5px;
-            padding: 10px 15px;
-            background-color: var(--primary-color);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color .3s;
-        }
+    .countdown-circle::before {
+      content: "";
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 255, 255, 0.4);
+      animation: rotate 10s linear infinite;
+    }
 
-        .links a:hover {
-            background-color: var(--primary-hover);
-        }
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
 
-        .telegram-link {
-            display: block;
-            text-align: center;
-            margin: 20px 0;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 700;
-        }
+    .countdown-circle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 25px rgba(0, 176, 62, 0.4);
+    }
 
-        .telegram-link i {
-            margin-left: 5px;
-        }
+    .provider-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+      width: 100%;
+    }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
+    .provider-card {
+      background: var(--container-bg);
+      border: 1px solid rgba(0, 176, 62, 0.2);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
 
-            h1 {
-                font-size: 24px;
-            }
+    .provider-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 176, 62, 0.2);
+      border-color: var(--primary-light);
+    }
 
-            h2 {
-                font-size: 18px;
-            }
-        }
+    .provider-card a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem;
+      color: var(--text-color);
+      text-decoration: none;
+      height: 100%;
+    }
 
-        .none {
-            display: none;
-        }
-    </style>
+    .provider-card .icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .provider-card:hover .icon {
+      transform: scale(1.2);
+      color: var(--primary-light);
+    }
+
+    .provider-card .name {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .server-list {
+      background: rgba(0, 176, 62, 0.05);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      margin: 2.5rem 0;
+      width: 100%;
+    }
+
+    .server-list h3 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    .server-list ul {
+      list-style-type: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .server-list li {
+      padding: 1rem;
+      background: var(--container-bg);
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      border-left: 3px solid var(--primary-color);
+    }
+
+    .server-list li:hover {
+      box-shadow: 0 5px 10px rgba(0, 176, 62, 0.1);
+      transform: translateX(5px);
+    }
+
+    .server-list li i {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+
+    .contact-button {
+      display: block;
+      width: fit-content;
+      margin: 2rem auto 0;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(0, 176, 62, 0.3);
+    }
+
+    .contact-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 176, 62, 0.4);
+    }
+
+    .contact-button i {
+      margin-left: 0.5rem;
+    }
+
+    /* عناصر مخفية */
+    .none {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+
+      .provider-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .countdown-circle {
+        width: 150px;
+        height: 150px;
+        font-size: 3rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .provider-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .server-list ul {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="notification-bar">
-        <i class="fas fa-info-circle"></i> مع تحيات يزيد❤️
-    </div>
-    <div class="container">
-        <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ ITC</h1>
-      <h2><i class="fas fa-sync-alt"></i> الرجاء ترك الصفحة مفتوحة و سيتم تحديث الصفحة كل 5 ثواني</h2>
-<div class="countdown-container">
-    <div class="countdown-circle" id="countdown">5</div>
-        </div>
-<div class="links">
-      <a href="STC.html">تخطي STC</a>
-      <a href="MOBILY.html">تخطي Mobily</a>
-      <a href="ZAIN.html">تخطي Zain</a>
-      <a href="ITC.html">تخطي ITC</a>
-      <a href="GO.html">تخطي GO</a>
-    </div>
-      <a href="https://t.me/jljal/" class="telegram-link">
-            <i class="fab fa-telegram"></i> للتواصل📲
+  <!-- شريط الإشعار -->
+  <div class="notification-bar">
+    <i class="fas fa-info-circle"></i> مع تحيات يزيد❤️
+  </div>
 
-      </a>
+  <div class="container">
+    <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ ITC</h1>
+    <h2><i class="fas fa-sync-alt spin"></i> الرجاء انتظار التحويل التلقائي خلال <span id="countdown-text">5</span> ثوانٍ</h2>
+
+    <div class="countdown-container">
+      <div class="countdown-circle" id="countdown">5</div>
     </div>
-    <iframe class="none" src="https://87.101.144.21:8080/speedtest/upload.php"></iframe>
-    <iframe class="none" src="https://ftthspeed-ruh.itc.sa:8080/speedtest/upload.php"></iframe>
-    <iframe class="none" src="https://jed-speed.itc.net.sa:8080/speedtest/upload.php"></iframe>
-    <script>
-        let countdown = 6;
-        const countdownDisplay = document.getElementById("countdown");
 
-        function updateCountdown() {
-            countdown--;
-            countdownDisplay.textContent = countdown;
-            if (countdown <= 0) {
-                clearInterval(countdownInterval);
-                countdownDisplay.textContent = "انتهى";
-            }
-        }
+    <div class="provider-grid">
+      <div class="provider-card">
+        <a href="STC.html">
+          <div class="icon"><i class="fas fa-bolt"></i></div>
+          <div class="name">STC</div>
+        </a>
+      </div>
+      <div class="provider-card">
+        <a href="MOBILY.html">
+          <div class="icon"><i class="fas fa-wifi"></i></div>
+          <div class="name">Mobily</div>
+        </a>
+      </div>
+      <div class="provider-card">
+        <a href="ZAIN.html">
+          <div class="icon"><i class="fas fa-signal"></i></div>
+          <div class="name">Zain</div>
+        </a>
+      </div>
+      <div class="provider-card">
+        <a href="ITC.html">
+          <div class="icon"><i class="fas fa-network-wired"></i></div>
+          <div class="name">ITC</div>
+        </a>
+      </div>
+      <div class="provider-card">
+        <a href="GO.html">
+          <div class="icon"><i class="fas fa-rocket"></i></div>
+          <div class="name">GO</div>
+        </a>
+      </div>
+    </div>
 
-        updateCountdown();
-        const countdownInterval = setInterval(updateCountdown, 1000);
-    </script>
+    <div class="server-list">
+      <h3><i class="fas fa-server"></i> الخوادم المستخدمة</h3>
+      <ul>
+        <li><i class="fas fa-link"></i> 87.101.144.21:8080</li>
+        <li><i class="fas fa-link"></i> ftthspeed-ruh.itc.sa:8080</li>
+        <li><i class="fas fa-link"></i> jed-speed.itc.net.sa:8080</li>
+      </ul>
+    </div>
+
+    <a href="https://t.me/jljal/" class="contact-button">
+      للتواصل <i class="fab fa-telegram"></i>
+    </a>
+  </div>
+
+  <!-- iframes مخفية للخوادم -->
+  <iframe class="none" src="https://87.101.144.21:8080/speedtest/upload.php"></iframe>
+  <iframe class="none" src="https://ftthspeed-ruh.itc.sa:8080/speedtest/upload.php"></iframe>
+  <iframe class="none" src="https://jed-speed.itc.net.sa:8080/speedtest/upload.php"></iframe>
+
+  <script>
+    let countdown = 5;
+    const countdownElement = document.getElementById('countdown');
+    const countdownTextElement = document.getElementById('countdown-text');
+
+    function updateCountdown() {
+      countdownElement.textContent = countdown;
+      countdownTextElement.textContent = countdown;
+      
+      if(countdown <= 0) {
+        window.location.href = 'ITC.html';
+        return;
+      }
+      
+      countdownElement.style.transform = 'scale(1.1)';
+      setTimeout(() => {
+        countdownElement.style.transform = 'scale(1)';
+      }, 200);
+      
+      countdown--;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setInterval(updateCountdown, 1000);
+    });
+
+    // تأثير حركة الأيقونات في بطاقات المزودين
+    document.querySelectorAll('.provider-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        const icon = card.querySelector('.icon i');
+        icon.classList.add('fa-beat');
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        const icon = card.querySelector('.icon i');
+        icon.classList.remove('fa-beat');
+      });
+    });
+  </script>
 </body>
 </html>
