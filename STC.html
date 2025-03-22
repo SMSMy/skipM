@@ -336,19 +336,19 @@
     document.addEventListener('DOMContentLoaded', () => {
       // Server configuration with multiple protocols and ports
       const serverConfigs = [
-        // STC servers
-        { name: 'speedtest.stc.net.sa', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
-        { name: 'speedtest1.stc.net.sa', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
-        // Other ISP servers
-        { name: 'speedtest.medu.sa', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
-        { name: 'speedtest.nour.net.sa', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
-        { name: 'speedtest.mobily.net.sa', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
-        { name: 'ookla1.zain.net.sa', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
-        { name: 'speedtest.go.net.kw', protocols: ['https://', 'http://'], ports: ['', ':8080'] },
-        // Global fallback servers
-        { name: 'speedtest.net', protocols: ['https://'], ports: [''] },
-        { name: 'fast.com', protocols: ['https://'], ports: [''] }
-      ];
+  { name: 'speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] },
+  { name: 'dam-speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] },
+  { name: 'jed-speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] },
+  { 
+    name: 'speedtest.saudi.net.sa.prod.hosts.ooklaserver.net',
+    protocols: ['https://', 'http://'], 
+    ports: [':8080'] 
+  },
+  { name: 'riy-speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] },
+  { name: 'med-speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] },
+  { name: 'tab-speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] },
+  { name: 'abh-speedtest.saudi.net.sa', protocols: ['https://', 'http://'], ports: [':8080'] }
+];
 
       // Elements
       const iframe = document.getElementById('speedTestIframe');
