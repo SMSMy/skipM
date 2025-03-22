@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>أداة قياس السرعة المتقدمة</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.your-proxy.com;">
+    <title>أداة قياس السرعة الآمنة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -57,130 +58,19 @@
             background-color: var(--container-bg);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             position: relative;
         }
 
-        .legal-warning {
-            background: #ffeb3b;
-            color: #000;
+        .legal-notice {
+            background: #fff3cd;
+            color: #856404;
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 2rem;
-            text-align: center;
-            border: 2px solid #fdd835;
-        }
-
-        h1, h2, h3 {
-            color: var(--heading-color);
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-top: 0.5rem;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 0.5rem;
-        }
-
-        h1::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary-light), var(--primary-dark));
-            border-radius: 3px;
-        }
-
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            margin: 2rem 0;
-        }
-
-        .countdown-circle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            font-size: 4rem;
-            font-weight: 700;
-            border-radius: 50%;
-            box-shadow: 0 10px 20px rgba(106, 27, 154, 0.3);
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .countdown-circle::before {
-            content: "";
-            position: absolute;
-            width: 90%;
-            height: 90%;
-            border-radius: 50%;
-            border: 2px dashed rgba(255, 255, 255, 0.4);
-            animation: rotate 10s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .provider-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 2.5rem 0;
-            width: 100%;
-        }
-
-        .provider-card {
-            background: var(--container-bg);
-            border: 1px solid rgba(106, 27, 154, 0.2);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            transition: var(--transition);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .provider-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(106, 27, 154, 0.2);
-        }
-
-        .provider-card a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.5rem;
-            color: var(--text-color);
-            text-decoration: none;
-            height: 100%;
-        }
-
-        .provider-card .icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            transition: var(--transition);
-        }
-
-        .provider-card:hover .icon {
-            transform: scale(1.2);
-            color: var(--primary-light);
+            border: 1px solid #ffeeba;
         }
 
         .speedtest-section {
-            width: 100%;
             margin: 2rem 0;
             background: var(--container-bg);
             border-radius: var(--border-radius);
@@ -202,7 +92,7 @@
             height: 500px;
             border: none;
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.5s ease;
         }
 
         .loading-overlay {
@@ -211,7 +101,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             display: none;
             justify-content: center;
             align-items: center;
@@ -219,21 +109,13 @@
         }
 
         .loading-content {
-            background: var(--container-bg);
-            padding: 2rem;
-            border-radius: var(--border-radius);
             text-align: center;
+            color: white;
         }
 
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
-            }
-
-            .countdown-circle {
-                width: 120px;
-                height: 120px;
-                font-size: 2.5rem;
             }
 
             #speedTestIframe {
@@ -244,122 +126,138 @@
 </head>
 <body>
     <div class="container">
-        <div class="legal-warning">
-            ⚠️ تنبيه: استخدام هذه الأداة قد يتعارض مع شروط استخدام الخدمة. الرجاء التحقق من القوانين المحلية قبل الاستخدام.
+        <div class="legal-notice">
+            ⚠️ ملاحظة: هذا المشروع لأغراض تعليمية فقط. يمنع استخدامه لأي أغراض غير قانونية.
         </div>
-
-        <h1><i class="fas fa-rocket"></i> أداة قياس السرعة المتقدمة</h1>
 
         <div class="speedtest-section">
             <div class="server-header">
-                <i class="fas fa-server"></i>
-                <h3>اختبار السرعة الحي - الخادم: <span id="current-server">1</span>/8</h3>
+                <i class="fas fa-tachometer-alt"></i>
+                <h3>اختبار السرعة الحي - الخادم: <span id="current-server">1</span>/5</h3>
             </div>
             <iframe 
                 id="speedTestIframe"
                 title="اختبار السرعة"
-                allowfullscreen
-            ></iframe>
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
         </div>
 
         <div class="loading-overlay" id="loadingOverlay">
             <div class="loading-content">
-                <div class="countdown-circle" id="loadingCircle">5</div>
-                <h3 style="margin-top:1rem">جاري التحميل...</h3>
+                <div class="spinner"></div>
+                <h3>جاري التحميل...</h3>
             </div>
-        </div>
-
-        <div class="provider-grid">
-            <!-- Provider Cards Here -->
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const servers = [
-                'speedtest.saudi.net.sa:8080',
-                'dam-speedtest.saudi.net.sa:8080',
-                'jed-speedtest.saudi.net.sa:8080',
-                'speedtest.saudi.net.sa.prod.hosts.ooklaserver.net:8080',
-                'riy-speedtest.saudi.net.sa:8080',
-                'med-speedtest.saudi.net.sa:8080',
-                'tab-speedtest.saudi.net.sa:8080',
-                'abh-speedtest.saudi.net.sa:8080'
+        (function() {
+            // 1. قائمة الخوادم الصالحة
+            const validServers = [
+                'https://speedtest.etisalat.ae',
+                'https://speedtest.vodafone.com.tr',
+                'https://speedtest.clouvider.net',
+                'https://speedtest.orange.es',
+                'https://speedtest.telstra.com'
             ];
 
-            // حالة التطبيق
-            let currentServerIndex = 0;
-            const state = {
-                isTesting: false,
-                currentTest: null
+            // 2. إعدادات الخادم الوكيل
+            const proxyConfig = {
+                url: 'https://cors-proxy.example.com/', // استبدل برابط الخادم الوكيل الخاص بك
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Access-Control-Allow-Origin': '*'
+                }
             };
 
-            // عناصر DOM
+            // 3. حالة التطبيق
+            let currentServerIndex = 0;
+            const appState = {
+                isTesting: false,
+                retryCount: 0,
+                maxRetries: 3
+            };
+
+            // 4. عناصر DOM
             const elements = {
                 iframe: document.getElementById('speedTestIframe'),
                 serverCounter: document.getElementById('current-server'),
-                loadingOverlay: document.getElementById('loadingOverlay'),
-                loadingCircle: document.getElementById('loadingCircle')
+                loadingOverlay: document.getElementById('loadingOverlay')
             };
 
-            // وظائف التحكم
-            const actions = {
+            // 5. وظائف التحكم
+            const controller = {
                 showLoader: () => {
                     elements.loadingOverlay.style.display = 'flex';
-                    let count = 5;
-                    const interval = setInterval(() => {
-                        elements.loadingCircle.textContent = count;
-                        count--;
-                        if(count < 0) clearInterval(interval);
-                    }, 1000);
                 },
                 
                 hideLoader: () => {
                     elements.loadingOverlay.style.display = 'none';
                 },
 
+                updateServerCounter: () => {
+                    elements.serverCounter.textContent = currentServerIndex + 1;
+                },
+
+                handleError: (error) => {
+                    console.error('حدث خطأ:', error);
+                    if(appState.retryCount < appState.maxRetries) {
+                        appState.retryCount++;
+                        setTimeout(() => controller.loadNextServer(), 2000);
+                    } else {
+                        alert('فشل التحميل. يرجى المحاولة لاحقًا.');
+                        controller.hideLoader();
+                    }
+                },
+
                 loadNextServer: async () => {
-                    if(state.isTesting) return;
-                    state.isTesting = true;
+                    if(appState.isTesting) return;
+                    appState.isTesting = true;
                     
                     try {
-                        actions.showLoader();
+                        controller.showLoader();
                         elements.iframe.style.opacity = '0';
+
+                        // استخدام الخادم الوكيل
+                        const targetUrl = new URL(validServers[currentServerIndex]);
+                        const proxiedUrl = `${proxyConfig.url}${targetUrl}`;
                         
-                        await new Promise(resolve => setTimeout(resolve, 500));
-                        
-                        elements.iframe.src = `https://${servers[currentServerIndex]}/`;
-                        elements.serverCounter.textContent = currentServerIndex + 1;
-                        
+                        elements.iframe.src = proxiedUrl;
+                        controller.updateServerCounter();
+
                         await new Promise((resolve, reject) => {
                             elements.iframe.onload = resolve;
                             elements.iframe.onerror = reject;
                         });
-                        
-                        currentServerIndex = (currentServerIndex + 1) % servers.length;
+
                         elements.iframe.style.opacity = '1';
-                        
+                        appState.retryCount = 0;
+                        currentServerIndex = (currentServerIndex + 1) % validServers.length;
+
                     } catch (error) {
-                        console.error('فشل تحميل الخادم:', error);
-                        currentServerIndex = (currentServerIndex + 1) % servers.length;
+                        controller.handleError(error);
                     } finally {
-                        actions.hideLoader();
-                        state.isTesting = false;
-                        setTimeout(actions.loadNextServer, 10000);
+                        appState.isTesting = false;
+                        controller.hideLoader();
+                        setTimeout(controller.loadNextServer, 10000);
                     }
                 }
             };
 
-            // معالجة الأخطاء
-            window.addEventListener('error', (e) => {
-                console.error('حدث خطأ غير متوقع:', e.error);
-                actions.hideLoader();
+            // 6. تهيئة التطبيق
+            document.addEventListener('DOMContentLoaded', () => {
+                controller.loadNextServer();
+                console.info('تم التهيئة بنجاح');
             });
 
-            // بدء التشغيل
-            actions.loadNextServer();
-            console.warn('تنبيه: هذا المشروع لأغراض تعليمية فقط');
-        });
+            // 7. معالجة رسائل الأخطاء
+            window.addEventListener('message', (e) => {
+                if(e.data.type === 'FRAME_ERROR') {
+                    controller.handleError(e.data.error);
+                }
+            });
+        })();
     </script>
 </body>
 </html>
