@@ -34,7 +34,10 @@
             color: var(--text-color);
             line-height: 1.6;
             min-height: 100vh;
-            padding-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
         }
 
         .notification-bar {
@@ -44,13 +47,16 @@
             padding: 0.8rem;
             font-weight: 600;
             box-shadow: 0 2px 10px rgba(45, 140, 240, 0.3);
-            position: relative;
-            z-index: 100;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
         }
 
         .container {
             max-width: 1000px;
-            margin: 2rem auto;
+            width: 100%;
+            margin-top: 4rem;
             padding: 2rem;
             background-color: var(--container-bg);
             border-radius: var(--border-radius);
@@ -65,13 +71,10 @@
         }
 
         h1 {
-            font-size: 2.2rem;
-            margin-top: 0.5rem;
+            font-size: 2.5rem;
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
             padding-bottom: 0.5rem;
+            display: inline-block;
         }
 
         h1::after {
@@ -85,13 +88,6 @@
             border-radius: 3px;
         }
 
-        h2 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #aaa;
-            margin: 1rem 0 2rem;
-        }
-
         .countdown-container {
             display: flex;
             justify-content: center;
@@ -102,16 +98,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: white;
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
             border-radius: 50%;
             box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
-            transition: var(--transition);
             position: relative;
+            transition: var(--transition);
         }
 
         .countdown-circle::before {
@@ -129,161 +125,114 @@
             to { transform: rotate(360deg); }
         }
 
-        .countdown-circle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 25px rgba(0, 123, 255, 0.4);
-        }
-
         .provider-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
-            margin: 2.5rem 0;
+            margin: 3rem 0;
         }
 
         .provider-card {
             background: var(--container-bg);
-            border: 1px solid rgba(45, 140, 240, 0.3);
+            border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
-            overflow: hidden;
+            padding: 1.5rem;
             transition: var(--transition);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            position: relative;
+            text-align: center;
         }
 
         .provider-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(45, 140, 240, 0.2);
-            border-color: var(--primary-light);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(45, 140, 240, 0.2);
+            border-color: var(--primary-color);
         }
 
         .provider-card a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.5rem 1rem;
             color: var(--text-color);
             text-decoration: none;
-            height: 100%;
+            display: block;
         }
 
-        .provider-card .icon {
+        .provider-card i {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
             color: var(--primary-color);
+            margin-bottom: 1rem;
             transition: var(--transition);
         }
 
-        .provider-card:hover .icon {
+        .provider-card:hover i {
             transform: scale(1.2);
             color: var(--primary-light);
         }
 
-        .provider-card .name {
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
         .server-list {
             background: rgba(45, 140, 240, 0.05);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: var(--border-radius);
-            margin: 2.5rem 0;
+            margin: 3rem 0;
             border: 1px solid var(--border-color);
         }
 
-        .server-list h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-
         .server-list ul {
-            list-style-type: none;
+            list-style: none;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
 
         .server-list li {
             padding: 1rem;
             background: rgba(0, 0, 0, 0.2);
-            border-radius: var(--border-radius);
+            border-radius: calc(var(--border-radius) - 4px);
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            gap: 1rem;
             transition: var(--transition);
             border-left: 3px solid var(--primary-color);
-            border: 1px solid var(--border-color);
-            word-break: break-all;
         }
 
         .server-list li:hover {
-            box-shadow: 0 5px 10px rgba(45, 140, 240, 0.1);
-            transform: translateX(5px);
+            transform: translateX(10px);
             background: rgba(45, 140, 240, 0.1);
         }
 
-        .server-list li i {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-
         .contact-button {
-            display: block;
-            width: fit-content;
-            margin: 2rem auto 0;
-            padding: 0.8rem 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2.5rem;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: white;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+            margin: 2rem auto 0;
         }
 
         .contact-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
-        }
-
-        .contact-button i {
-            margin-left: 0.5rem;
-        }
-
-        .spin {
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            box-shadow: 0 5px 15px rgba(45, 140, 240, 0.3);
         }
 
         @media (max-width: 768px) {
             .container {
                 padding: 1.5rem;
-                margin: 1rem;
+                margin-top: 6rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .countdown-circle {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
             }
 
             .provider-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-
-            .countdown-circle {
-                width: 120px;
-                height: 120px;
-                font-size: 2.5rem;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            h2 {
-                font-size: 1.1rem;
             }
         }
 
@@ -300,103 +249,93 @@
 </head>
 <body>
     <div class="notification-bar">
-        <i class="fas fa-heart"></i> يزيد يرحب بكم ❤️
+        <i class="fas fa-heart"></i> مع تحيات يزيد ❤️
     </div>
-    
+
     <div class="container">
-        <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ Mobily</h1>
-        <h2><i class="fas fa-sync-alt spin"></i> الرجاء انتظار التحويل التلقائي خلال <span id="countdown-text">5</span> ثوانٍ</h2>
+        <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة</h1>
+        <h2><i class="fas fa-sync-alt"></i> التحديث التلقائي خلال <span id="countdown">5</span> ثوانٍ</h2>
 
         <div class="countdown-container">
-            <div class="countdown-circle" id="countdown">5</div>
+            <div class="countdown-circle" id="countdownCircle">5</div>
         </div>
 
         <div class="provider-grid">
             <div class="provider-card">
                 <a href="STC.html">
-                    <div class="icon"><i class="fas fa-bolt"></i></div>
+                    <i class="fas fa-bolt"></i>
                     <div class="name">STC</div>
                 </a>
             </div>
             <div class="provider-card">
                 <a href="MOBILY.html">
-                    <div class="icon"><i class="fas fa-wifi"></i></div>
+                    <i class="fas fa-wifi"></i>
                     <div class="name">Mobily</div>
                 </a>
             </div>
             <div class="provider-card">
                 <a href="ZAIN.html">
-                    <div class="icon"><i class="fas fa-signal"></i></div>
+                    <i class="fas fa-signal"></i>
                     <div class="name">Zain</div>
                 </a>
             </div>
             <div class="provider-card">
                 <a href="ITC.html">
-                    <div class="icon"><i class="fas fa-network-wired"></i></div>
+                    <i class="fas fa-network-wired"></i>
                     <div class="name">ITC</div>
                 </a>
             </div>
             <div class="provider-card">
                 <a href="GO.html">
-                    <div class="icon"><i class="fas fa-rocket"></i></div>
+                    <i class="fas fa-rocket"></i>
                     <div class="name">GO</div>
                 </a>
             </div>
         </div>
 
         <div class="server-list">
-            <h3><i class="fas fa-server"></i> الخوادم المستخدمة</h3>
+            <h3><i class="fas fa-server"></i> الخوادم النشطة</h3>
             <ul>
-                <li><i class="fas fa-link"></i> jed.myspeed.net.sa:8080</li>
-                <li><i class="fas fa-link"></i> server-1402.prod.hosts.ooklaserver.net:8080</li>
-                <li><i class="fas fa-link"></i> dam.myspeed.net.sa:8080</li>
-                <li><i class="fas fa-link"></i> ryd.myspeed.net.sa:8080</li>
+                <li><i class="fas fa-link"></i>jed.myspeed.net.sa:8080</li>
+                <li><i class="fas fa-link"></i>server-1402.prod.hosts.ooklaserver.net:8080</li>
+                <li><i class="fas fa-link"></i>dam.myspeed.net.sa:8080</li>
+                <li><i class="fas fa-link"></i>ryd.myspeed.net.sa:8080</li>
             </ul>
         </div>
 
         <a href="https://t.me/jljal/" class="contact-button">
-            للتواصل <i class="fab fa-telegram"></i>
+            <i class="fab fa-telegram"></i>
+            الدعم الفني
         </a>
     </div>
 
     <script>
         let countdown = 5;
         const countdownElement = document.getElementById('countdown');
-        const countdownTextElement = document.getElementById('countdown-text');
-        
-        function updateCountdown() {
+        const circleElement = document.getElementById('countdownCircle');
+
+        function updateTimer() {
             countdownElement.textContent = countdown;
-            countdownTextElement.textContent = countdown;
+            circleElement.textContent = countdown;
             
             if(countdown <= 0) {
                 window.location.href = 'MOBILY.html';
                 return;
             }
             
-            // تأثير النبض أثناء العد التنازلي
-            countdownElement.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                countdownElement.style.transform = 'scale(1)';
-            }, 200);
-            
+            circleElement.style.transform = `scale(${1 + (5 - countdown) * 0.05})`;
             countdown--;
         }
 
-        // بدء العد التنازلي فور تحميل الصفحة
-        window.addEventListener('DOMContentLoaded', () => {
-            setInterval(updateCountdown, 1000);
-        });
-
-        // إضافة تفاعلية للبطاقات
+        setInterval(updateTimer, 1000);
+        
         document.querySelectorAll('.provider-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
-                const icon = card.querySelector('.icon i');
-                icon.classList.add('fa-beat');
+                card.querySelector('i').classList.add('fa-beat');
             });
             
             card.addEventListener('mouseleave', () => {
-                const icon = card.querySelector('.icon i');
-                icon.classList.remove('fa-beat');
+                card.querySelector('i').classList.remove('fa-beat');
             });
         });
     </script>
