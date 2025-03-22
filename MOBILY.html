@@ -2,224 +2,403 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="5; URL=MOBILY.html">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>تخطي تحديد السرعة لـ Mobily</title>
-    <link href="../../fonts.googleapis.com/css2fd45.css?family=Cairo:wght@400;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #f0f2f5;
-            --container-bg: #ffffff;
-            --text-color: #333;
-            --heading-color: #2c3e50;
-            --primary-color: #3498db;
-            --primary-hover: #2980b9;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #1a1a1a;
-                --container-bg: #2c2c2c;
-                --text-color: #e0e0e0;
-                --heading-color: #ffffff;
-                --primary-color: #4a90e2;
-                --primary-hover: #3a7bc8;
-                --shadow-color: rgba(255, 255, 255, 0.1);
-            }
+            --bg-color: #0a0a0a;
+            --container-bg: #1a1a1a;
+            --text-color: #e0e0e0;
+            --heading-color: #ffffff;
+            --primary-color: #2d8cf0;
+            --primary-light: #51a1f5;
+            --primary-dark: #0056b3;
+            --accent-color: #00c3ff;
+            --border-radius: 12px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s ease;
+            --border-color: #333333;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-
-        body, html {
-            height: 100%;
-            overflow: hidden;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: Cairo, sans-serif;
+            font-family: 'Cairo', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .container {
-            width: 100%;
-            margin: 0 auto;
-            background-color: var(--container-bg);
-            flex-grow: 1;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-
-        h1, h2 {
-            text-align: center;
-            color: var(--heading-color);
-            margin-bottom: 20px;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 2rem;
         }
 
         .notification-bar {
-            background-color: #3498db; /* اللون الأحمر القاتم */
-            color: #fff;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
             text-align: center;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: 700;
-            position: sticky;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+            padding: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(45, 140, 240, 0.3);
+            position: relative;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--container-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--heading-color);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-top: 0.5rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-bottom: 0.5rem;
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-light), var(--primary-dark));
+            border-radius: 3px;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #aaa;
+            margin: 1rem 0 2rem;
         }
 
         .countdown-container {
-            text-align: center;
-            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
         }
 
         .countdown-circle {
-            width: 120px;
-            height: 120px;
-            background-color: var(--primary-color);
-            color: #fff;
-            border-radius: 50%;
-            font-size: 36px;
-            line-height: 120px;
-            margin: 0 auto;
-            box-shadow: 0 0 10px rgba(52, 152, 219, .5);
-        }
-
-        .ad-container {
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .links {
             display: flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-
-        .links a {
-            margin: 5px;
-            padding: 10px 15px;
-            background-color: var(--primary-color);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color .3s;
-        }
-
-        .links a:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .telegram-link {
-            display: block;
-            text-align: center;
-            margin: 20px 0;
-            color: var(--primary-color);
-            text-decoration: none;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            font-size: 3.5rem;
             font-weight: 700;
+            border-radius: 50%;
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+            transition: var(--transition);
+            position: relative;
         }
 
-        .telegram-link i {
-            margin-left: 5px;
+        .countdown-circle::before {
+            content: "";
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            animation: rotate 10s linear infinite;
         }
 
-        @media (max-width: 600px) {
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .countdown-circle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px rgba(0, 123, 255, 0.4);
+        }
+
+        .provider-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .provider-card {
+            background: var(--container-bg);
+            border: 1px solid rgba(45, 140, 240, 0.3);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .provider-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(45, 140, 240, 0.2);
+            border-color: var(--primary-light);
+        }
+
+        .provider-card a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            height: 100%;
+        }
+
+        .provider-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .provider-card:hover .icon {
+            transform: scale(1.2);
+            color: var(--primary-light);
+        }
+
+        .provider-card .name {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .server-list {
+            background: rgba(45, 140, 240, 0.05);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 2.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .server-list h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .server-list ul {
+            list-style-type: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .server-list li {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            border-left: 3px solid var(--primary-color);
+            border: 1px solid var(--border-color);
+            word-break: break-all;
+        }
+
+        .server-list li:hover {
+            box-shadow: 0 5px 10px rgba(45, 140, 240, 0.1);
+            transform: translateX(5px);
+            background: rgba(45, 140, 240, 0.1);
+        }
+
+        .server-list li i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .contact-button {
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+        }
+
+        .contact-button i {
+            margin-left: 0.5rem;
+        }
+
+        .spin {
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
             .container {
-                padding: 10px;
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .provider-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .countdown-circle {
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
             }
 
             h1 {
-                font-size: 24px;
+                font-size: 1.8rem;
             }
 
             h2 {
-                font-size: 18px;
+                font-size: 1.1rem;
             }
         }
 
-        .none {
-            display: none;
+        @media (max-width: 480px) {
+            .provider-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .server-list ul {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="notification-bar">
-        <i class="fas fa-info-circle"></i>
-        <i class="fas fa-info-circle"></i> مع تحيات يزيد ❤️
+        <i class="fas fa-heart"></i> يزيد يرحب بكم ❤️
     </div>
+    
     <div class="container">
         <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ Mobily</h1>
-        <h2><i class="fas fa-sync-alt"></i> الرجاء ترك الصفحة مفتوحة و سيتم تحديث الصفحة كل 5 ثواني</h2>
-<div class="countdown-container">
-    <div class="countdown-circle" id="countdown">5</div>
+        <h2><i class="fas fa-sync-alt spin"></i> الرجاء انتظار التحويل التلقائي خلال <span id="countdown-text">5</span> ثوانٍ</h2>
+
+        <div class="countdown-container">
+            <div class="countdown-circle" id="countdown">5</div>
         </div>
-<div class="links">
-      <a href="STC.html">تخطي STC</a>
-      <a href="MOBILY.html">تخطي Mobily</a>
-      <a href="ZAIN.html">تخطي Zain</a>
-      <a href="ITC.html">تخطي ITC</a>
-      <a href="GO.html">تخطي GO</a>
-    </div>
-        <a href="https://t.me/jljal/" class="telegram-link">
-            <i class="fab fa-telegram"></i> للتواصل📲
+
+        <div class="provider-grid">
+            <div class="provider-card">
+                <a href="STC.html">
+                    <div class="icon"><i class="fas fa-bolt"></i></div>
+                    <div class="name">STC</div>
+                </a>
+            </div>
+            <div class="provider-card">
+                <a href="MOBILY.html">
+                    <div class="icon"><i class="fas fa-wifi"></i></div>
+                    <div class="name">Mobily</div>
+                </a>
+            </div>
+            <div class="provider-card">
+                <a href="ZAIN.html">
+                    <div class="icon"><i class="fas fa-signal"></i></div>
+                    <div class="name">Zain</div>
+                </a>
+            </div>
+            <div class="provider-card">
+                <a href="ITC.html">
+                    <div class="icon"><i class="fas fa-network-wired"></i></div>
+                    <div class="name">ITC</div>
+                </a>
+            </div>
+            <div class="provider-card">
+                <a href="GO.html">
+                    <div class="icon"><i class="fas fa-rocket"></i></div>
+                    <div class="name">GO</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="server-list">
+            <h3><i class="fas fa-server"></i> الخوادم المستخدمة</h3>
+            <ul>
+                <li><i class="fas fa-link"></i> jed.myspeed.net.sa:8080</li>
+                <li><i class="fas fa-link"></i> server-1402.prod.hosts.ooklaserver.net:8080</li>
+                <li><i class="fas fa-link"></i> dam.myspeed.net.sa:8080</li>
+                <li><i class="fas fa-link"></i> ryd.myspeed.net.sa:8080</li>
+            </ul>
+        </div>
+
+        <a href="https://t.me/jljal/" class="contact-button">
+            للتواصل <i class="fab fa-telegram"></i>
         </a>
-    <h2 style="font-size: 16px; font-weight: normal; background-color: transparent !important;">
-  <i class="fas fa-sync-alt"></i> الخوادم المستخدمة
-</h2>
-<h2 style="font-size: 16px; font-weight: normal; background-color: transparent !important;">
-  <i class="fas fa-sync-alt"></i> "https://jed.myspeed.net.sa:8080/speedtest/upload.php
-</h2>
-<h2 style="font-size: 16px; font-weight: normal; background-color: transparent !important;">
-  https://server-1402.prod.hosts.ooklaserver.net:8080/speedtest/upload.php
-</h2>
-<h2 style="font-size: 16px; font-weight: normal; background-color: transparent !important;">
-  https://dam.myspeed.net.sa:8080/speedtest/upload.php
-</h2>
-<h2 style="font-size: 16px; font-weight: normal; background-color: transparent !important;">
-  http://ryd.myspeed.net.sa:8080/speedtest/upload.php
-</h2>
-<h2 style="font-size: 16px; font-weight: normal; background-color: transparent !important;">
-  https://server-1402.prod.hosts.ooklaserver.net:8080/speedtest/upload.php
-</h2>
-<h2 style="font-size: 16px; font-weight: normal; background-color: transparent !important;">
-  https://server-1402.prod.hosts.ooklaserver.net:8080/speedtest/upload.php
-</h2>
+    </div>
 
-
-
-
-
-<iframe class="none" src="https://jed.myspeed.net.sa:8080/speedtest/upload.php"></iframe>
-    <iframe class="none" src="https://server-1402.prod.hosts.ooklaserver.net:8080/speedtest/upload.php"></iframe>
-    <iframe class="none" src="https://dam.myspeed.net.sa:8080/speedtest/upload.php"></iframe>
-	<iframe class="none" src="http://ryd.myspeed.net.sa:8080/speedtest/upload.php"></iframe>
-  <iframe class="none" src="https://server-1402.prod.hosts.ooklaserver.net:8080/speedtest/upload.php"></iframe>
-  <iframe class="none" src="https://server-1402.prod.hosts.ooklaserver.net:8080/speedtest/upload.php"></iframe>
- <script>
-        let countdown = 6;
-        const countdownDisplay = document.getElementById("countdown");
-
+    <script>
+        let countdown = 5;
+        const countdownElement = document.getElementById('countdown');
+        const countdownTextElement = document.getElementById('countdown-text');
+        
         function updateCountdown() {
-            countdown--;
-            countdownDisplay.textContent = countdown;
-            if (countdown <= 0) {
-                clearInterval(countdownInterval);
-                countdownDisplay.textContent = "انتهى";
+            countdownElement.textContent = countdown;
+            countdownTextElement.textContent = countdown;
+            
+            if(countdown <= 0) {
+                window.location.href = 'MOBILY.html';
+                return;
             }
+            
+            // تأثير النبض أثناء العد التنازلي
+            countdownElement.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                countdownElement.style.transform = 'scale(1)';
+            }, 200);
+            
+            countdown--;
         }
 
-        updateCountdown();
-        const countdownInterval = setInterval(updateCountdown, 1000);
+        // بدء العد التنازلي فور تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', () => {
+            setInterval(updateCountdown, 1000);
+        });
+
+        // إضافة تفاعلية للبطاقات
+        document.querySelectorAll('.provider-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('.icon i');
+                icon.classList.add('fa-beat');
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('.icon i');
+                icon.classList.remove('fa-beat');
+            });
+        });
     </script>
 </body>
 </html>
