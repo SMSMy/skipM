@@ -40,19 +40,6 @@
             padding: 2rem;
         }
 
-        .notification-bar {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: white;
-            text-align: center;
-            padding: 0.8rem;
-            font-weight: 600;
-            box-shadow: 0 2px 10px rgba(45, 140, 240, 0.3);
-            width: 100%;
-            position: fixed;
-            top: 0;
-            z-index: 1000;
-        }
-
         .container {
             max-width: 1000px;
             width: 100%;
@@ -88,43 +75,8 @@
             border-radius: 3px;
         }
 
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            margin: 2rem 0;
-        }
-
-        .countdown-circle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            font-size: 4rem;
-            font-weight: 700;
-            border-radius: 50%;
-            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .countdown-circle::before {
-            content: "";
-            position: absolute;
-            width: 90%;
-            height: 90%;
-            border-radius: 50%;
-            border: 2px dashed rgba(255, 255, 255, 0.4);
-            animation: rotate 10s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
+        /* تم حذف أنماط العد العلوي */
+        
         .provider-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -143,7 +95,7 @@
 
         .provider-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(45, 140, 240, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.2);
             border-color: var(--primary-color);
         }
 
@@ -163,6 +115,41 @@
         .provider-card:hover i {
             transform: scale(1.2);
             color: var(--primary-light);
+        }
+
+        .speedtest-section {
+            width: 100%;
+            margin: 2rem 0;
+            background: var(--container-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .server-header {
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #speedTestIframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            transition: opacity 0.3s ease;
+            background: var(--container-bg) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232d8cf0"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>') no-repeat center;
+            background-size: 100px;
+        }
+
+        .error-message {
+            color: #ff4444;
+            padding: 1rem;
+            text-align: center;
+            display: none;
         }
 
         .server-list {
@@ -191,9 +178,26 @@
             border-left: 3px solid var(--primary-color);
         }
 
-        .server-list li:hover {
-            transform: translateX(10px);
-            background: rgba(45, 140, 240, 0.1);
+        .server-list li.active {
+            border-left-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .retry-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .retry-button:hover {
+            background: var(--primary-light);
         }
 
         .contact-button {
@@ -225,12 +229,6 @@
                 font-size: 2rem;
             }
 
-            .countdown-circle {
-                width: 150px;
-                height: 150px;
-                font-size: 3rem;
-            }
-
             .provider-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -244,20 +242,19 @@
             .server-list ul {
                 grid-template-columns: 1fr;
             }
+
+            #speedTestIframe {
+                height: 350px;
+            }
         }
     </style>
 </head>
 <body>
-    
-
     <div class="container">
         <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة</h1>
-        <h2><i class="fas fa-sync-alt"></i> التحديث التلقائي خلال <span id="countdown">5</span> ثوانٍ</h2>
+        <!-- تم حذف عداد العد العلوي -->
 
-        <div class="countdown-container">
-            <div class="countdown-circle" id="countdownCircle">5</div>
-        </div>
-
+        <!-- شبكة مزودي الخدمة -->
         <div class="provider-grid">
             <div class="provider-card">
                 <a href="STC.html">
@@ -291,51 +288,184 @@
             </div>
         </div>
 
+        <!-- قائمة الخوادم النشطة -->
         <div class="server-list">
             <h3><i class="fas fa-server"></i> الخوادم النشطة</h3>
-            <ul>
-                <li><i class="fas fa-link"></i>jed.myspeed.net.sa:8080</li>
-                <li><i class="fas fa-link"></i>server-1402.prod.hosts.ooklaserver.net:8080</li>
-                <li><i class="fas fa-link"></i>dam.myspeed.net.sa:8080</li>
-                <li><i class="fas fa-link"></i>ryd.myspeed.net.sa:8080</li>
+            <ul id="serverList">
+                <!-- ستملأ القائمة ديناميكيًا بواسطة JavaScript -->
             </ul>
         </div>
 
+        <button class="retry-button" id="retryButton">
+            <i class="fas fa-redo"></i> إعادة المحاولة مع جميع الخوادم
+        </button>
+
         <a href="https://t.me/jljal/" class="contact-button">
-            <i class="fab fa-telegram"></i>
-            للتواصل
+            <i class="fab fa-telegram"></i> للتواصل
         </a>
     </div>
 
     <script>
-        let countdown = 5;
-        const countdownElement = document.getElementById('countdown');
-        const circleElement = document.getElementById('countdownCircle');
+        // قائمة الخوادم الجديدة
+        const serverConfigs = [
+            { name: 'speedtest.net/embed?start=automatic', protocols: ['https://'], ports: [''] },
+            { name: 'fast.com', protocols: ['https://'], ports: [''] },
+            { name: 'speed.cloudflare.com', protocols: ['https://'], ports: [''] },
+            { name: 'jed-speedtest.saudi.net.sa', protocols: ['https://'], ports: [''] },
+            { name: 'speed.cloudflare.com/instant', protocols: ['https://'], ports: [''] },
+            { name: 'meqyas.sa', protocols: ['https://'], ports: [''] },
+            { name: 'server-1402.prod.hosts.ooklaserver.net', protocols: ['https://', 'http://'], ports: [':8080', ''] }
+        ];
 
-        function updateTimer() {
-            countdownElement.textContent = countdown;
-            circleElement.textContent = countdown;
-            
-            if(countdown <= 0) {
-                window.location.href = 'MOBILY.html';
-                return;
-            }
-            
-            circleElement.style.transform = `scale(${1 + (5 - countdown) * 0.05})`;
-            countdown--;
+        // عناصر الواجهة
+        const iframe = document.getElementById('speedTestIframe');
+        const errorMsg = document.getElementById('errorMsg');
+        const serverList = document.getElementById('serverList');
+        const retryButton = document.getElementById('retryButton');
+        const currentServerElement = document.getElementById('current-server');
+        const totalServersElement = document.getElementById('total-servers');
+
+        let availableServers = [];
+        let currentServerIndex = 0;
+        let isCheckingServers = false;
+        let serverSwitchInterval;
+
+        // تعبئة قائمة الخوادم بالتصميم
+        function populateServerList() {
+            serverList.innerHTML = '';
+            serverConfigs.forEach(server => {
+                const li = document.createElement('li');
+                li.id = `server-${server.name.replace(/\./g, '-')}`;
+                li.innerHTML = `<i class="fas fa-server"></i> ${server.name}`;
+                serverList.appendChild(li);
+            });
+            totalServersElement.textContent = serverConfigs.length;
         }
 
-        setInterval(updateTimer, 1000);
-        
+        // التحقق من خادم واحد باستخدام تركيبات البروتوكول والمنفذ
+        async function checkServer(server) {
+            const serverElement = document.getElementById(`server-${server.name.replace(/\./g, '-')}`);
+            for (const protocol of server.protocols) {
+                for (const port of server.ports) {
+                    const url = `${protocol}${server.name}${port}`;
+                    try {
+                        const controller = new AbortController();
+                        const timeoutId = setTimeout(() => controller.abort(), 5000);
+                        await fetch(url, { mode: 'no-cors', signal: controller.signal });
+                        clearTimeout(timeoutId);
+                        availableServers.push({ name: server.name, url: url });
+                        if(serverElement) {
+                            serverElement.classList.add('active');
+                            serverElement.innerHTML = `<i class="fas fa-check-circle"></i> ${server.name} (متاح)`;
+                        }
+                        return true;
+                    } catch (err) {
+                        continue;
+                    }
+                }
+            }
+            if(serverElement) {
+                serverElement.classList.add('failed');
+                serverElement.innerHTML = `<i class="fas fa-times-circle"></i> ${server.name} (غير متاح)`;
+            }
+            return false;
+        }
+
+        // التحقق من جميع الخوادم
+        async function checkAllServers() {
+            if(isCheckingServers) return;
+            isCheckingServers = true;
+            availableServers = [];
+            populateServerList();
+            currentServerIndex = 0;
+
+            for (const server of serverConfigs) {
+                await checkServer(server);
+            }
+
+            if(availableServers.length > 0) {
+                currentServerIndex = 0;
+                loadServer(availableServers[0]);
+                startServerSwitching();
+            } else {
+                errorMsg.textContent = 'لم يتم العثور على خوادم متاحة. يرجى المحاولة مرة أخرى أو استخدام شبكة مختلفة.';
+                errorMsg.style.display = 'block';
+                iframe.src = '';
+            }
+            isCheckingServers = false;
+        }
+
+        // تحميل خادم في الـ iframe
+        function loadServer(server) {
+            errorMsg.style.display = 'none';
+            iframe.style.opacity = '0.5';
+            setTimeout(() => {
+                try {
+                    iframe.src = server.url;
+                    currentServerElement.textContent = availableServers.indexOf(server) + 1;
+                    iframe.style.opacity = '1';
+                    // تحديث حالة الخادم في القائمة
+                    document.querySelectorAll('#serverList li').forEach(li => {
+                        li.classList.remove('active', 'current');
+                    });
+                    const serverElement = document.getElementById(`server-${server.name.replace(/\./g, '-')}`);
+                    if(serverElement) {
+                        serverElement.classList.add('active', 'current');
+                    }
+                } catch (error) {
+                    errorMsg.textContent = `فشل تحميل ${server.name}: ${error.message}`;
+                    errorMsg.style.display = 'block';
+                    nextServer();
+                }
+            }, 1000);
+        }
+
+        // الانتقال للخادم التالي
+        function nextServer() {
+            if(availableServers.length === 0) return;
+            currentServerIndex = (currentServerIndex + 1) % availableServers.length;
+            loadServer(availableServers[currentServerIndex]);
+        }
+
+        // التبديل التلقائي بين الخوادم (كل 15 ثانية)
+        function startServerSwitching() {
+            if(serverSwitchInterval) clearInterval(serverSwitchInterval);
+            serverSwitchInterval = setInterval(() => {
+                if(availableServers.length > 1) {
+                    nextServer();
+                }
+            }, 5000);
+        }
+
+        // التعامل مع تحميل الـ iframe
+        iframe.addEventListener('load', () => {
+            iframe.style.opacity = '1';
+        });
+
+        // التعامل مع أخطاء تحميل الـ iframe
+        iframe.addEventListener('error', () => {
+            errorMsg.textContent = 'فشل تحميل الخادم - جاري المحاولة التالية...';
+            errorMsg.style.display = 'block';
+            nextServer();
+        });
+
+        // إعادة المحاولة عند النقر على زر إعادة المحاولة
+        retryButton.addEventListener('click', () => {
+            checkAllServers();
+        });
+
+        // تفعيل تأثير الاهتزاز على بطاقات مزودي الخدمة
         document.querySelectorAll('.provider-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
                 card.querySelector('i').classList.add('fa-beat');
             });
-            
             card.addEventListener('mouseleave', () => {
                 card.querySelector('i').classList.remove('fa-beat');
             });
         });
+
+        // بدء التحقق من الخوادم مباشرةً عند تحميل الصفحة
+        checkAllServers();
     </script>
 </body>
 </html>
