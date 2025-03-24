@@ -5,677 +5,262 @@
     <meta http-equiv="refresh" content="5; URL=STC.html">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>تخطي تحديد السرعة لـ STC</title>
-    <script type="text/javascript" nonce="25d8218346114eae8c0c9377f03" src="//local.adguard.org?ts=1742775095754&amp;type=content-script&amp;dmn=private-us-east-1.manuscdn.com&amp;url=https%3A%2F%2Fprivate-us-east-1.manuscdn.com%2FsessionFile%2FLUtXtHDOFek7tFu6UNKNSl%2Fsandbox%2F6KXr6sIBFk3nuFgpmI4CH4_1742779576328_na1fn_L2hvbWUvdWJ1bnR1L2ZpbmFsX2VuaGFuY2VkX3dlYnNpdGU.html%3FPolicy%3DeyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvTFV0WHRIRE9GZWs3dEZ1NlVOS05TbC9zYW5kYm94LzZLWHI2c0lCRmszbnVGZ3BtSTRDSDRfMTc0Mjc3OTU3NjMyOF9uYTFmbl9MMmh2YldVdmRXSjFiblIxTDJacGJtRnNYMlZ1YUdGdVkyVmtYM2RsWW5OcGRHVS5odG1sIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzQzMzgzMzc2fX19XX0_%26Key-Pair-Id%3DK2HSFNDJXOU9YS%26Signature%3DgAz1pYnT0O68cm4TUJf~8g6u2TkizLUAb8rK5aY9oeTpye35077oLqf0aIxLCXNfiaPq1gRqkZk5HS0aAaHUa0700T8neEpeCzSKUujlyuWRqWZ4ycwqFCv~4e642ShlZZwtlQYHFMCkxVGRxNbWIVsuc8PS0U9TJdWTvMqSK8ijg1HfUyv-~bBpnV~~3Ic5bZNZ1ftvJK0McL-Hiy7alAyqFUp1VpLjcr8OKcDmPQ1MqTIEdWh6QGuhmSYK6FXCO~MAWeMl-r5QvPMB0vt9O7WNvLIIuaaTQgzRWovkdjDmRtl3Z8ZVewVS9eEPHo5-3PVXJaSssNN240KdE5t2Sw__&amp;app=chrome.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script>
-<script type="text/javascript" nonce="25d8218346114eae8c0c9377f03" src="//local.adguard.org?ts=1742775095754&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Improved CSS with dark mode and animations */
         :root {
-            --bg-color: #f0f2f5;
-            --container-bg: #ffffff;
-            --text-color: #333;
-            --heading-color: #2c3e50;
-            --primary-color: #34005f; /* اللون الأساسي */
-            --primary-hover: #2a004d; /* تدرج داكن */
-            --shadow-color: rgba(52, 0, 95, 0.1); /* ظلال بنفس التدرج */
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #1a1a1a;
-                --container-bg: #2c2c2c;
-                --text-color: #e0e0e0;
-                --heading-color: #ffffff;
-                --primary-color: #4a0075; /* تدرج أغمق للوضع الليلي */
-                --primary-hover: #3a005c;
-                --shadow-color: rgba(82, 0, 147, 0.1);
-            }
-        }
-
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        body, html {
-            height: 100%;
-            overflow: hidden;
-            scroll-behavior: smooth;
+            --primary-color: #34005f;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --bg-light: #f8f9fa;
+            --bg-dark: #343a40;
+            --text-light: #ffffff;
+            --text-dark: #212529;
         }
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            font-size: 16px;
-            line-height: 1.6;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top right, rgba(0, 136, 169, 0.05), transparent 70%),
-                        radial-gradient(circle at bottom left, rgba(255, 211, 105, 0.05), transparent 70%);
-            z-index: -1;
-            pointer-events: none;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
-            width: 100%;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            background-color: var(--container-bg);
-            flex-grow: 1;
-            overflow-x: hidden;
-            overflow-y: auto;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            border-radius: 0 0 20px 20px;
-            position: relative;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        h1, h2 {
-            text-align: center;
-            color: var(--heading-color);
-            margin-bottom: 20px;
-            font-weight: 700;
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        h1 {
-            font-size: 32px;
-            margin-top: 20px;
-            letter-spacing: -0.5px;
-            animation: slideDown 0.5s ease-out;
-        }
-
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            border-radius: 3px;
-        }
-
-        h2 {
-            font-size: 20px;
-            margin-bottom: 30px;
-            font-weight: 500;
-            color: var(--text-color);
-            opacity: 0.9;
-            animation: slideDown 0.7s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        
-
-        .notification-bar i {
-            margin-left: 8px;
-            animation: pulse 2s infinite;
-        }
-
-        .countdown-container {
-            text-align: center;
-            margin: 40px 0;
-            position: relative;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .countdown-wrapper {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto;
-        }
-
-        .countdown-circle {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-            color: #fff;
-            border-radius: 50%;
-            font-size: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            box-shadow: var(--neon-glow);
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            z-index: 2;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            animation: pulse 1.5s infinite alternate;
-        }
-
-        .countdown-ring {
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            width: 170px;
-            height: 170px;
-            border-radius: 50%;
-            border: 4px solid transparent;
-            border-top-color: var(--secondary-color);
-            border-right-color: var(--secondary-color);
-            animation: spin 5s linear infinite;
-            z-index: 1;
-        }
-
-        .countdown-ring::before {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            right: 5px;
-            bottom: 5px;
-            border-radius: 50%;
-            border: 4px solid transparent;
-            border-top-color: var(--accent-color);
-            animation: spin 3s linear infinite reverse;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes pulse {
-            from {
-                transform: scale(1);
-                box-shadow: var(--neon-glow);
-            }
-            to {
-                transform: scale(1.05);
-                box-shadow: 0 0 15px rgba(0, 136, 169, 0.6), 0 0 30px rgba(0, 136, 169, 0.4), 0 0 45px rgba(0, 136, 169, 0.2);
-            }
-        }
-
-        .ad-container {
-            margin: 30px 0;
-            text-align: center;
-            padding: 20px;
-            background-color: var(--glass-bg);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1.2s ease-out;
-        }
-
-        .links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-            padding: 0 10px;
-            animation: fadeIn 1.4s ease-out;
-        }
-
-        .links a {
-            padding: 20px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-            color: #fff;
-            text-decoration: none;
-            border-radius: 12px;
-            transition: all 0.4s;
-            font-weight: 600;
-            text-align: center;
-            box-shadow: 0 5px 15px var(--shadow-color);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100px;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-
-        .links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-            z-index: 1;
-        }
-
-        .links a i {
-            font-size: 24px;
-            margin-bottom: 10px;
-            z-index: 2;
-            transition: all 0.3s;
-        }
-
-        .links a span {
-            z-index: 2;
-            position: relative;
-        }
-
-        .links a:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 10px 25px var(--shadow-color);
-            background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
-        }
-
-        .links a:hover i {
-            transform: scale(1.2);
-            color: var(--secondary-color);
-        }
-
-        .links a:active {
-            transform: translateY(2px) scale(0.98);
-            box-shadow: 0 2px 10px var(--shadow-color);
-        }
-
-        .telegram-link {
-            display: block;
-            text-align: center;
-            margin: 40px auto;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 20px;
-            padding: 15px 30px;
-            border-radius: 50px;
-            transition: all 0.4s;
-            background-color: rgba(0, 136, 169, 0.1);
-            max-width: 250px;
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 1.6s ease-out;
-        }
-
-        .telegram-link::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s;
-            z-index: 1;
-        }
-
-        .telegram-link i {
-            margin-left: 10px;
-            font-size: 22px;
-            position: relative;
-            z-index: 2;
-            transition: all 0.3s;
-        }
-
-        .telegram-link span {
-            position: relative;
-            z-index: 2;
-        }
-
-        .telegram-link:hover {
-            color: #fff;
-            background-color: var(--primary-color);
-            box-shadow: 0 5px 20px var(--shadow-color);
-            transform: translateY(-3px);
-        }
-
-        .telegram-link:hover::before {
-            animation: shine 1.5s;
-        }
-
-        .telegram-link:hover i {
-            transform: scale(1.2) rotate(10deg);
-        }
-
-        @keyframes shine {
-            0% {
-                left: -50%;
-            }
-            100% {
-                left: 150%;
-            }
-        }
-
-        .servers-section {
-            margin: 40px 0;
-            padding: 25px;
-            background-color: var(--glass-bg);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1.8s ease-out;
-        }
-
-        .servers-title {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--heading-color);
-            margin-bottom: 20px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .servers-title i {
-            margin-left: 10px;
-            color: var(--primary-color);
-        }
-
-        .server-list {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
-        }
-
-        .server-item {
-            padding: 15px;
-            background-color: var(--container-bg);
+            background: white;
+            padding: 2rem;
             border-radius: 10px;
-            font-size: 14px;
-            word-break: break-all;
-            border-right: 3px solid var(--primary-color);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-            position: relative;
-            display: flex;
-            align-items: center;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
 
-        .server-item::before {
-            content: '';
-            display: inline-block;
-            width: 8px;
+        .progress-bar {
             height: 8px;
-            background-color: var(--secondary-color);
-            border-radius: 50%;
-            margin-left: 10px;
-            box-shadow: 0 0 5px var(--secondary-color);
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
         }
 
-        .server-item:hover {
-            transform: translateX(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-            border-right-width: 5px;
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-                border-radius: 0;
-            }
-
-            h1 {
-                font-size: 26px;
-            }
-
-            h2 {
-                font-size: 18px;
-            }
-
-            .links {
-                grid-template-columns: 1fr;
-            }
-
-            .server-list {
-                grid-template-columns: 1fr;
-            }
+        .status {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
         }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px;
-            }
-
-            .countdown-wrapper {
-                width: 130px;
-                height: 130px;
-            }
-
-            .countdown-circle {
-                width: 130px;
-                height: 130px;
-                font-size: 40px;
-            }
-
-            .countdown-ring {
-                width: 150px;
-                height: 150px;
-                top: -10px;
-                left: -10px;
-            }
-
-            .telegram-link {
-                font-size: 18px;
-                padding: 12px 25px;
-            }
+        .server-status {
+            margin: 1rem 0;
+            padding: 10px;
+            border-radius: 5px;
         }
 
-        .none {
-            display: none;
+        .server-status.success {
+            background-color: var(--success-color);
+            color: white;
         }
 
-        /* Animated elements */
-        .animated-icon {
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
+        .server-status.danger {
+            background-color: var(--danger-color);
+            color: white;
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        /* Loading animation */
-        .loading-dots {
-            display: inline-flex;
-            align-items: center;
-            height: 20px;
-        }
-
-        .loading-dots span {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: currentColor;
-            opacity: 0.6;
-            margin: 0 2px;
-        }
-
-        .loading-dots span:nth-child(1) {
-            animation: bounce 1.5s infinite 0s;
-        }
-
-        .loading-dots span:nth-child(2) {
-            animation: bounce 1.5s infinite 0.2s;
-        }
-
-        .loading-dots span:nth-child(3) {
-            animation: bounce 1.5s infinite 0.4s;
-        }
-
-        @keyframes bounce {
-            0%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-8px);
-                opacity: 1;
+        @media (prefers-color-scheme: dark) {
+            body {
+                --bg-light: #343a40;
+                --text-dark: #ffffff;
+                --primary-color: #4a0075;
             }
         }
     </style>
 </head>
 <body>
-    <div class="notification-bar">
-        <i class="fas fa-info-circle"></i> مع تحيات يزيد❤️
-    </div>
     <div class="container">
-        <h1><i class="fas fa-tachometer-alt animated-icon"></i> تخطي تحديد السرعة لـ STC</h1>
-        <h2><i class="fas fa-sync-alt"></i> الرجاء ترك الصفحة مفتوحة و سيتم تحديث الصفحة كل 5 ثواني</h2>
-        
-        <div class="ad-container">
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+        <h1 class="text-center mb-4">
+            <i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ STC
+        </h1>
+
+        <div class="status">
+            <div id="connection-status">جارٍ الاتصال...</div>
+            <div id="refresh-timer">التحديث التلقائي بعد <span id="countdown">5</span> ثوان</div>
         </div>
-        
-        <div class="countdown-container">
-            <div class="countdown-wrapper">
-                <div class="countdown-ring"></div>
-                <div class="countdown-circle" id="countdown">5</div>
-            </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
         </div>
-        
-        <div class="links">
-            <a href="STC.html">
-                <i class="fas fa-rocket"></i>
-                <span>تخطي STC</span>
-            </a>
-            <a href="MOBILY.html">
-                <i class="fas fa-rocket"></i>
-                <span>تخطي Mobily</span>
-            </a>
-            <a href="ZAIN.html">
-                <i class="fas fa-rocket"></i>
-                <span>تخطي Zain</span>
-            </a>
-            <a href="ITC.html">
-                <i class="fas fa-rocket"></i>
-                <span>تخطي ITC</span>
-            </a>
-            <a href="GO.html">
-                <i class="fas fa-rocket"></i>
-                <span>تخطي GO</span>
-            </a>
+
+        <div class="server-status" id="server-status">
+            جارٍ التحقق من الخوادم...
         </div>
-        
-        <a href="https://t.me/jljal/" class="telegram-link">
-            <i class="fab fa-telegram"></i>
-            <span>للتواصل📲</span>
-        </a>
-        
-        <div class="servers-section">
-            <div class="servers-title">
-                <i class="fas fa-server"></i> الخوادم المستخدمة
-                <div class="loading-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <ul class="server-list">
-                <li class="server-item">https://speedtest.saudi.net.sa:8080/speedtest/upload.php</li>
-                <li class="server-item">https://dam-speedtest.saudi.net.sa:8080/speedtest/upload.php</li>
-                <li class="server-item">https://jed-speedtest.saudi.net.sa:8080/speedtest/upload.php</li>
-                <li class="server-item">https://speedtest.saudi.net.sa:8080/speedtest/upload.php</li>
-                <li class="server-item">http://speedtest.saudi.net.sa.prod.hosts.ooklaserver.net:8080/speedtest/upload.php</li>
-                <li class="server-item">https://riy-speedtest.saudi.net:8080/speedtest/upload.php</li>
-<li class="server-item">https://med-speedtest.saudi.net.sa:8080/speedtest/upload.php</li>
-<li class="server-item">tab-speedtest.saudi.net.sa:8080/speedtest/upload.php</li>
-<li class="server-item">https://abh-speedtest.saudi.net.sa:8080/speedtest/upload.php</li>
 
-            </ul>
+        <div class="text-center mt-4">
+            <button class="btn btn-primary" onclick="toggleTheme()">
+                <i class="fas fa-adjust"></i> تغيير الثيم
+            </button>
         </div>
-        
-        <iframe class="none" src="https://speedtest.saudi.net.sa:8080/speedtest/upload.php"></iframe>
-        <iframe class="none" src="https://dam-speedtest.saudi.net.sa:8080/speedtest/upload.php"></iframe>
-        <iframe class="none" src="https://jed-speedtest.saudi.net.sa:8080/speedtest/upload.php"></iframe>
-        <iframe class="none" src="https://speedtest.saudi.net.sa:8080/speedtest/upload.php"></iframe>
-        <iframe class="none" src="http://speedtest.saudi.net.sa.prod.hosts.ooklaserver.net:8080/speedtest/upload.php"></iframe>
-        <iframe class="none" src="https://riy-speedtest.saudi.net:8080/speedtest/upload.php"></iframe>
-<iframe class="none" src="https://med-speedtest.saudi.net.sa.sa:8080/speedtest/upload.php"></iframe>
-<iframe class="none" src="https://tab-speedtest.saudi.net.sa:8080/speedtest/upload.php"></iframe>
-<iframe class="none" src="https://abh-speedtest.saudi.net.sa:8080/speedtest/upload.php"></iframe>
 
-
-        <script>
-            // Animate elements on page load
-            document.addEventListener('DOMContentLoaded', function() {
-                const elements = document.querySelectorAll('.container > *');
-                elements.forEach((el, index) => {
-                    el.style.opacity = '0';
-                    setTimeout(() => {
-                        el.style.opacity = '1';
-                    }, 100 * index);
-                });
-            });
-            
-            // Countdown timer
-            let countdown = 6;
-            const countdownDisplay = document.getElementById("countdown");
-
-            function updateCountdown() {
-                countdown--;
-                countdownDisplay.textContent = countdown;
-                if (countdown <= 0) {
-                    clearInterval(countdownInterval);
-                    countdownDisplay.textContent = "انتهى";
-                }
-            }
-
-            updateCountdown();
-            const countdownInterval = setInterval(updateCountdown, 1000);
-        </script>
+        <div class="mt-4">
+            <h3>الخوادم النشطة:</h3>
+            <ul id="active-servers" class="list-group"></ul>
+        </div>
     </div>
+
+    <script>
+        // Configuration
+        const SERVERS = {
+            stc: [
+                "https://speedtest.saudi.net.sa:8080/speedtest/upload.php",
+                "https://dam-speedtest.saudi.net.sa:8080/speedtest/upload.php",
+                "https://jed-speedtest.saudi.net.sa:8080/speedtest/upload.php",
+                "https://riy-speedtest.saudi.net:8080/speedtest/upload.php",
+                "https://med-speedtest.saudi.net.sa:8080/speedtest/upload.php"
+            ],
+            mobily: [
+                // Add Mobily servers here
+            ],
+            zain: [
+                // Add Zain servers here
+            ]
+        };
+
+        // State variables
+        let currentTheme = 'light';
+        let activeServers = [];
+        let refreshInterval;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            startProgress();
+            checkServers();
+            updateCountdown();
+            registerServiceWorker();
+        });
+
+        // Service Worker Registration
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker Registered'))
+                    .catch(err => console.log('Service Worker Failed:', err));
+            }
+        }
+
+        // Server checking with retries
+        async function checkServers() {
+            const serverList = SERVERS.stc; // Change based on ISP detection
+            const results = await Promise.allSettled(
+                serverList.map(server => 
+                    fetch(server, { method: 'HEAD', mode: 'no-cors' })
+                        .then(() => ({ server, status: 'success' }))
+                        .catch(() => ({ server, status: 'failed' }))
+                )
+            );
+
+            activeServers = results
+                .filter(r => r.status === 'fulfilled' && r.value.status === 'success')
+                .map(r => r.value.server);
+
+            updateServerList();
+        }
+
+        // Update server display
+        function updateServerList() {
+            const list = document.getElementById('active-servers');
+            list.innerHTML = activeServers.map(server => 
+                `<li class="list-group-item">${server}</li>`
+            ).join('');
+
+            const statusEl = document.getElementById('server-status');
+            if (activeServers.length > 0) {
+                statusEl.className = 'server-status success';
+                statusEl.textContent = `تم تفعيل ${activeServers.length} خوادم`;
+            } else {
+                statusEl.className = 'server-status danger';
+                statusEl.textContent = 'لا توجد خوادم نشطة';
+            }
+        }
+
+        // Progress bar animation
+        function startProgress() {
+            const progress = document.getElementById('progress');
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) clearInterval(interval);
+                width += 2;
+                progress.style.width = width + '%';
+            }, 100);
+        }
+
+        // Countdown timer
+        function updateCountdown() {
+            let timeLeft = 5;
+            const countdown = document.getElementById('countdown');
+            refreshInterval = setInterval(() => {
+                timeLeft--;
+                countdown.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(refreshInterval);
+                    window.location.reload();
+                }
+            }, 1000);
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.body.style.backgroundColor = 
+                currentTheme === 'light' ? '#f8f9fa' : '#343a40';
+            document.body.style.color = 
+                currentTheme === 'light' ? '#212529' : '#ffffff';
+        }
+
+        // Periodic server pings
+        setInterval(() => {
+            if (activeServers.length === 0) return;
+            const server = activeServers[Math.floor(Math.random() * activeServers.length)];
+            fetch(server, { 
+                method: 'HEAD', 
+                mode: 'no-cors',
+                headers: { 'User-Agent': getRandomUserAgent() }
+            });
+        }, Math.random() * 5000 + 3000); // 3-8s random interval
+
+        // User agent rotation
+        function getRandomUserAgent() {
+            const agents = [
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+            ];
+            return agents[Math.floor(Math.random() * agents.length)];
+        }
+    </script>
+    <script>
+        // Service Worker script (sw.js)
+        self.addEventListener('install', event => {
+            self.skipWaiting();
+        });
+
+        self.addEventListener('activate', event => {
+            clients.claim();
+        });
+
+        self.addEventListener('fetch', event => {
+            if (event.request.url.includes('speedtest')) {
+                event.respondWith(
+                    fetch(event.request)
+                        .catch(() => new Response('Service Unavailable', { status: 503 }))
+                );
+            }
+        });
+    </script>
 </body>
 </html>
