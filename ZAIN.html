@@ -5,87 +5,176 @@
     <meta http-equiv="refresh" content="5; URL=ZAIN.html">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>تخطي تحديد السرعة لـ Zain KSA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #527e1f;
-            --success-color: #2ecc71;
-            --danger-color: #e74c3c;
-            --bg-light: #f8f9fa;
-            --bg-dark: #2c2c2c;
-            --text-light: #ffffff;
-            --text-dark: #212529;
-        }
-
-        @media (prefers-color-scheme: dark) {
+        /* Improved CSS with dark mode and animations */
             :root {
-                --bg-light: #2c2c2c;
-                --text-dark: #ffffff;
-                --primary-color: #5c8f22;
-            }
+            --primary: #699f3c;
+            --success: rgb(40, 167, 69);
+            --danger: #ff0018;
+            --dark: rgba(0, 56, 13, 0.81);
+            --light: #f8f9fa;
+            --border-radius: 10px;
+            --transition: all 0.3s ease;
         }
 
         body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            font-family: 'Tajawal', sans-serif;
+            background: var(--dark);
+            color: #bfbfbf;
             padding: 20px;
-            transition: background-color 0.3s, color 0.3s;
+            transition: var(--transition);
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: white;
+            background: var(--dark);
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        /* Provider Grid */
+        .provider-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .provider-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+            .provider-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                border-color: var(--primary);
+            }
+
+            .provider-card.active {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 2px var(--primary);
+            }
+
+            .provider-card a {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 1rem;
+                color: white;
+                text-decoration: none;
+                transition: var(--transition);
+            }
+
+            .provider-icon {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+                transition: var(--transition);
+            }
+
+        /* Progress Section */
+        .progress-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1rem 0;
         }
 
         .progress-bar {
             height: 8px;
-            background: #e9ecef;
+            background: rgba(255,255,255,0.2);
             border-radius: 4px;
             overflow: hidden;
-            margin: 20px 0;
         }
 
         .progress-fill {
             height: 100%;
-            background: var(--primary-color);
-            width: 0%;
+            background: var(--primary);
+            width: 0;
             transition: width 0.3s;
         }
 
-        .status {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-
-        .server-status {
+        /* Server List */
+        .server-list {
+            list-style: none;
+            padding: 0;
             margin: 1rem 0;
-            padding: 10px;
-            border-radius: 5px;
         }
 
-        .server-status.success {
-            background-color: var(--success-color);
-            color: white;
+        .server-item {
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--border-radius);
         }
 
-        .server-status.danger {
-            background-color: var(--danger-color);
-            color: white;
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .status-icon {
+            animation: pulse 2s infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .provider-card {
+                flex-direction: row;
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center mb-4">
-            <i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ Zain KSA
-        </h1>
+        <header class="text-center mb-4">
+            <h1><i class="fas fa-rocket"></i> تخطي تحديد السرعة ZAIN</h1>
+            <p>اختر مزود الخدمة الخاص بك</p>
+        </header>
+
+        <div class="provider-grid">
+    <div class="provider-card" data-provider="stc">
+        <a href="#">
+            <i class="fas fa-satellite-dish provider-icon"></i>
+            <span class="provider-name">STC</span>
+        </a>
+    </div>
+    <div class="provider-card" data-provider="mobily">
+        <a href="#">
+            <i class="fas fa-tower-cell provider-icon"></i>
+            <span class="provider-name">Mobily</span>
+        </a>
+    </div>
+    <div class="provider-card" data-provider="zain">
+        <a href="#">
+            <i class="fas fa-tower-observation provider-icon"></i>
+            <span class="provider-name">Zain</span>
+        </a>
+    </div>
+    <div class="provider-card" data-provider="GO">
+        <a href="#">
+            <i class="fas fa-bolt-lightning provider-icon"></i>
+            <span class="provider-name">GO</span>
+        </a>
+    </div>
+    <div class="provider-card" data-provider="ITC">
+        <a href="#">
+            <i class="fas fa-wifi provider-icon"></i>
+            <span class="provider-name">ITC</span>
+        </a>
+    </div>
+</div>
 
         <div class="status">
             <div id="connection-status">جارٍ الاتصال...</div>
@@ -110,6 +199,14 @@
             <h3>الخوادم النشطة:</h3>
             <ul id="active-servers" class="list-group"></ul>
         </div>
+    </div>
+
+
+        <footer class="text-center mt-5">
+            <a href="https://t.me/jljal" class="telegram-link">
+                <i class="fab fa-telegram"></i> الدعم الفني
+            </a>
+        </footer>
     </div>
 
     <script>
