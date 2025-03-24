@@ -1,569 +1,314 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>تخطي تحديد السرعة لـ STC</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --bg-color: #f5f7fa;
-      --container-bg: #ffffff;
-      --text-color: #2d3748;
-      --heading-color: #1a202c;
-      --primary-color: #6a1b9a;
-      --primary-light: #9c27b0;
-      --primary-dark: #4a148c;
-      --accent-color: #8e24aa;
-      --border-radius: 12px;
-      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --transition: all 0.3s ease;
-    }
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5; URL=STC.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>تخطي تحديد السرعة لـ STC</title>
+    <script type="text/javascript" nonce="25d8218346114eae8c0c9377f03" src="//local.adguard.org?ts=1742775095754&amp;type=content-script&amp;dmn=private-us-east-1.manuscdn.com&amp;url=https%3A%2F%2Fprivate-us-east-1.manuscdn.com%2FsessionFile%2FLUtXtHDOFek7tFu6UNKNSl%2Fsandbox%2FPIkFPSTefeOt1JUuXwBgl2_1742776706045_na1fn_L2hvbWUvdWJ1bnR1L2ZpbmFsX3dlYnNpdGU.html%3FPolicy%3DeyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvTFV0WHRIRE9GZWs3dEZ1NlVOS05TbC9zYW5kYm94L1BJa0ZQU1RlZmVPdDFKVXVYd0JnbDJfMTc0Mjc3NjcwNjA0NV9uYTFmbl9MMmh2YldVdmRXSjFiblIxTDJacGJtRnNYM2RsWW5OcGRHVS5odG1sIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzQzMzgwNTA2fX19XX0_%26Key-Pair-Id%3DK2HSFNDJXOU9YS%26Signature%3DTrVBHflz6UnC4swwRLHkRe0~hny~uKHo4e7DJWD7mPTGSSMyHoIIecCpvWjBdzedrFmamT8MyuQygzSrp8BDH8wNKm2uMOZV-o~-TR3nvHUmkWI0TR~bjNlg982F0mB~W63ZhNoTC~HB1s476ve45tvFbbFNCKUb07K83U~RWQyHwhb-TFzsux8oJmS0C2kTBGkpih4XBYny-ewrJrlzLFIXTeBPH9iZcDykGdSsaCRCrZiHqEcDMZ~mIoWBsrKsbLhOMbEivFzo~zdhT-Nj5QwuvFLL6ciMao1Jn8CZHEiec1F15rZZ2EsgUlXVI6JKy9TJ5ai1iXJv4PhmvrDSTA__&amp;app=chrome.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script>
+<script type="text/javascript" nonce="25d8218346114eae8c0c9377f03" src="//local.adguard.org?ts=1742775095754&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><link href="../../fonts.googleapis.com/css2fd45.css?family=Cairo:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #f5f5f5;
+            --container-bg: #ffffff;
+            --text-color: #333333;
+            --heading-color: #005f6b;
+            --primary-color: #00a1b0; /* اللون الأساسي الجديد - تركواز */
+            --primary-hover: #007a85; /* تدرج داكن */
+            --accent-color: #ff6b6b; /* لون التأكيد - وردي محمر */
+            --shadow-color: rgba(0, 161, 176, 0.2); /* ظلال بنفس التدرج */
+        }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg-color: #121212;
-        --container-bg: #1e1e1e;
-        --text-color: #e2e8f0;
-        --heading-color: #f7fafc;
-        --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
-      }
-    }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --container-bg: #1e1e1e;
+                --text-color: #e0e0e0;
+                --heading-color: #00c2d4;
+                --primary-color: #00a1b0; /* تدرج أغمق للوضع الليلي */
+                --primary-hover: #007a85;
+                --accent-color: #ff6b6b;
+                --shadow-color: rgba(0, 161, 176, 0.3);
+            }
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
 
-    body {
-      font-family: 'Cairo', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
+        body, html {
+            height: 100%;
+            overflow: hidden;
+        }
 
-    .container {
-      max-width: 1000px;
-      width: 100%;
-      padding: 2rem;
-      background-color: var(--container-bg);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-    }
+        body {
+            font-family: Cairo, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            font-size: 16px;
+            line-height: 1.6;
+        }
 
-    h1, h2, h3 {
-      color: var(--heading-color);
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            background-color: var(--container-bg);
+            flex-grow: 1;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-top: 0.5rem;
-      position: relative;
-      display: inline-block;
-      padding-bottom: 0.5rem;
-    }
+        h1, h2 {
+            text-align: center;
+            color: var(--heading-color);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
 
-    h1::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 25%;
-      width: 50%;
-      height: 3px;
-      background: linear-gradient(to right, var(--primary-light), var(--primary-dark));
-      border-radius: 3px;
-    }
+        h1 {
+            font-size: 28px;
+            margin-top: 20px;
+        }
 
-    .countdown-container {
-      display: flex;
-      justify-content: center;
-      margin: 2rem 0;
-    }
+        h2 {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
 
-    .countdown-circle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 180px;
-      height: 180px;
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      color: white;
-      font-size: 4rem;
-      font-weight: 700;
-      border-radius: 50%;
-      box-shadow: 0 10px 20px rgba(106, 27, 154, 0.3);
-      transition: var(--transition);
-      position: relative;
-    }
+        .notification-bar {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .countdown-circle::before {
-      content: "";
-      position: absolute;
-      width: 90%;
-      height: 90%;
-      border-radius: 50%;
-      border: 2px dashed rgba(255, 255, 255, 0.4);
-      animation: rotate 10s linear infinite;
-    }
+        .countdown-container {
+            text-align: center;
+            margin: 40px 0;
+        }
 
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+        .countdown-circle {
+            width: 130px;
+            height: 130px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: #fff;
+            border-radius: 50%;
+            font-size: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            animation: pulse 1s infinite alternate;
+        }
 
-    .speedtest-section {
-      width: 100%;
-      margin: 2rem 0;
-      background: var(--container-bg);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+                box-shadow: 0 5px 15px var(--shadow-color);
+            }
+            to {
+                transform: scale(1.05);
+                box-shadow: 0 8px 20px var(--shadow-color);
+            }
+        }
 
-    .server-header {
-      padding: 1rem;
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      color: white;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+        .ad-container {
+            margin: 30px 0;
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-radius: 10px;
+        }
 
-    #speedTestIframe {
-      width: 100%;
-      height: 500px;
-      border: none;
-      transition: opacity 0.3s ease;
-      min-height: 500px;
-      background: var(--container-bg) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236a1b9a"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>') no-repeat center;
-      background-size: 100px;
-    }
+        .links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            gap: 12px;
+        }
 
-    .server-list {
-      background: rgba(106, 27, 154, 0.05);
-      padding: 1.5rem;
-      border-radius: var(--border-radius);
-      margin: 2.5rem 0;
-      width: 100%;
-    }
+        .links a {
+            padding: 12px 20px;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 600;
+            min-width: 120px;
+            text-align: center;
+            box-shadow: 0 3px 10px var(--shadow-color);
+        }
 
-    .server-list ul {
-      list-style-type: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1rem;
-    }
-    
-    .server-list li {
-      padding: 1rem;
-      background: var(--container-bg);
-      border-radius: var(--border-radius);
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      transition: var(--transition);
-      border-left: 3px solid var(--primary-color);
-    }
+        .links a:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
 
-    .server-list li.active {
-      border-left-color: #4CAF50;
-      background-color: rgba(76, 175, 80, 0.1);
-    }
+        .telegram-link {
+            display: block;
+            text-align: center;
+            margin: 30px 0;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
 
-    .server-list li.failed {
-      border-left-color: #f44336;
-      background-color: rgba(244, 67, 54, 0.1);
-    }
+        .telegram-link:hover {
+            color: var(--primary-hover);
+            background-color: rgba(0, 161, 176, 0.05);
+            transform: scale(1.03);
+        }
 
-    .server-list li i {
-      color: var(--primary-color);
-      font-size: 1.2rem;
-    }
+        .telegram-link i {
+            margin-left: 8px;
+            font-size: 20px;
+        }
 
-    .error-message {
-      color: #ff4444;
-      padding: 1rem;
-      text-align: center;
-      display: none;
-    }
+        .servers-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-radius: 10px;
+        }
 
-    .status-indicator {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 1rem 0;
-      padding: 0.75rem;
-      border-radius: var(--border-radius);
-      background: var(--container-bg);
-      box-shadow: var(--shadow);
-    }
+        .servers-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--heading-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
 
-    .status-indicator .spinner {
-      margin-left: 0.5rem;
-      animation: spin 1.5s linear infinite;
-    }
+        .server-list {
+            list-style: none;
+            padding: 0;
+        }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+        .server-item {
+            padding: 10px;
+            margin-bottom: 8px;
+            background-color: var(--container-bg);
+            border-radius: 6px;
+            font-size: 14px;
+            word-break: break-all;
+            border-right: 3px solid var(--primary-color);
+        }
 
-    .contact-button {
-      display: block;
-      width: fit-content;
-      margin: 2rem auto 0;
-      padding: 0.8rem 2rem;
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      color: white;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: var(--transition);
-      box-shadow: 0 4px 10px rgba(106, 27, 154, 0.3);
-    }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
 
-    .contact-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(106, 27, 154, 0.4);
-    }
+            h1 {
+                font-size: 24px;
+            }
 
-    .contact-button i {
-      margin-right: 0.5rem;
-    }
-    
-    .retry-button {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1.5rem;
-      background: var(--primary-color);
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: var(--transition);
-    }
-    
-    .retry-button:hover {
-      background: var(--primary-light);
-    }
-    
-    @media (max-width: 768px) {
-      .container {
-        padding: 1.5rem;
-      }
-      #speedTestIframe {
-        height: 400px;
-      }
-      .countdown-circle {
-        width: 150px;
-        height: 150px;
-        font-size: 3rem;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .server-list ul {
-        grid-template-columns: 1fr;
-      }
-      #speedTestIframe {
-        height: 350px;
-      }
-    }
-  </style>
+            h2 {
+                font-size: 18px;
+            }
+
+            .links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .links a {
+                width: 80%;
+                margin-bottom: 10px;
+            }
+        }
+
+        .none {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة</h1>
-    
-    
-
-    <div class="status-indicator" id="statusIndicator">
-      <i class="fas fa-sync-alt spinner"></i>
-      <span id="statusText">جاري التحقق من الخوادم المتاحة...</span>
+    <div class="notification-bar">
+        <i class="fas fa-info-circle"></i> مع تحيات يزيد❤️
     </div>
-
-    <div class="speedtest-section">
-      <div class="server-header">
-        <i class="fas fa-tachometer-alt"></i>
-        <h3>اختبار السرعة الحي</h3>
-        <div class="server-counter">
-          <span id="current-server">-</span>/<span id="total-servers">0</span>
+    <div class="container">
+        <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ STC</h1>
+        <h2><i class="fas fa-sync-alt"></i> الرجاء ترك الصفحة مفتوحة و سيتم تحديث الصفحة كل 5 ثواني</h2>
+        <div class="ad-container">
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
-      </div>
-      <iframe id="speedTestIframe" 
-              title="اختبار سرعة الإنترنت"
-              loading="lazy"
-              allowfullscreen>
-      </iframe>
-      <div class="error-message" id="errorMsg"></div>
+        <div class="countdown-container">
+            <div class="countdown-circle" id="countdown">5</div>
+        </div>
+        <div class="links">
+            <a href="STC.html"><i class="fas fa-rocket"></i> تخطي STC</a>
+            <a href="MOBILY.html"><i class="fas fa-rocket"></i> تخطي Mobily</a>
+            <a href="ZAIN.html"><i class="fas fa-rocket"></i> تخطي Zain</a>
+            <a href="ITC.html"><i class="fas fa-rocket"></i> تخطي ITC</a>
+            <a href="GO.html"><i class="fas fa-rocket"></i> تخطي GO</a>
+        </div>
+        <a href="https://t.me/jljal/" class="telegram-link">
+            <i class="fab fa-telegram"></i> للتواصل📲
+        </a>
+        
+        <div class="servers-section">
+            <div class="servers-title">
+                <i class="fas fa-server"></i> الخوادم المستخدمة
+            </div>
+            <ul class="server-list">
+                <li class="server-item">https://speedtest.saudi.net.sa:8080/speedtest/upload.php</li>
+                <li class="server-item">https://dam-speedtest.saudi.net.sa:8080/speedtest/upload.php</li>
+                <li class="server-item">https://jed-speedtest.saudi.net.sa:8080/speedtest/upload.php</li>
+                <li class="server-item">https://speedtest.saudi.net.sa:8080/speedtest/upload.php</li>
+                <li class="server-item">http://speedtest.saudi.net.sa.prod.hosts.ooklaserver.net:8080/speedtest/upload.php</li>
+            </ul>
+        </div>
+		
+        <iframe class="none" src="https://speedtest.saudi.net.sa:8080/speedtest/upload.php"></iframe>
+        <iframe class="none" src="https://dam-speedtest.saudi.net.sa:8080/speedtest/upload.php"></iframe>
+        <iframe class="none" src="https://jed-speedtest.saudi.net.sa:8080/speedtest/upload.php"></iframe>
+        <iframe class="none" src="https://speedtest.saudi.net.sa:8080/speedtest/upload.php"></iframe>
+        <iframe class="none" src="http://speedtest.saudi.net.sa.prod.hosts.ooklaserver.net:8080/speedtest/upload.php"></iframe>
+
+        <script>
+            let countdown = 6;
+            const countdownDisplay = document.getElementById("countdown");
+
+            function updateCountdown() {
+                countdown--;
+                countdownDisplay.textContent = countdown;
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownDisplay.textContent = "انتهى";
+                }
+            }
+
+            updateCountdown();
+            const countdownInterval = setInterval(updateCountdown, 1000);
+        </script>
     </div>
-
-    <div class="server-list">
-      <h3><i class="fas fa-server"></i> الخوادم المستخدمة</h3>
-      <ul id="serverList">
-        <!-- Server list will be populated by JavaScript -->
-      </ul>
-    </div>
-
-    <button class="retry-button" id="retryButton">
-      <i class="fas fa-redo"></i> إعادة المحاولة مع جميع الخوادم
-    </button>
-
-    <a href="https://t.me/jljal/" class="contact-button" rel="noopener noreferrer">
-      للتواصل <i class="fab fa-telegram"></i>
-    </a>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Server configuration with multiple protocols and ports
-      const serverConfigs = [
-  // الخوادم التي تعمل بمنفذ 8080
-  { 
-    name: 'speedtest.saudi.net.sa',
-    protocols: ['https://', 'http://'], 
-    ports: [':8080', ''] 
-  },
-  { 
-    name: 'dam-speedtest.saudi.net.sa',
-    protocols: ['https://', 'http://'], 
-    ports: [':8080', ''] 
-  },
-  { 
-    name: 'jed-speedtest.saudi.net.sa',
-    protocols: ['https://', 'http://'], 
-    ports: [':8080', ''] 
-  },
-
-  // تعديل خاص لخادم Ookla الرسمي
-  { 
-    name: 'speedtest.saudi.net.sa.prod.hosts.ooklaserver.net',
-    protocols: ['https://'], // البروتوكول الإجباري
-    ports: [':8080'] // المنفذ الإجباري
-  }
-];
-
-      // Elements
-      const iframe = document.getElementById('speedTestIframe');
-      const errorMsg = document.getElementById('errorMsg');
-      const statusIndicator = document.getElementById('statusIndicator');
-      const statusText = document.getElementById('statusText');
-      const serverList = document.getElementById('serverList');
-      const retryButton = document.getElementById('retryButton');
-      const currentServerElement = document.getElementById('current-server');
-      const totalServersElement = document.getElementById('total-servers');
-      
-      // Variables
-      let availableServers = [];
-      let currentServerIndex = 0;
-      let isCheckingServers = false;
-      let countdown = 5;
-      let countdownInterval;
-      let serverSwitchInterval;
-      
-      // Countdown function
-      const countdownElement = document.getElementById('countdown');
-      const startCountdown = () => {
-        countdownInterval = setInterval(() => {
-          countdownElement.textContent = countdown;
-          countdown--;
-          
-          if (countdown < 0) {
-            clearInterval(countdownInterval);
-            if (availableServers.length > 0) {
-              loadServer(availableServers[0]);
-            } else {
-              checkAllServers();
-            }
-          }
-        }, 1000);
-      };
-      
-      // Populate server list UI
-      const populateServerList = () => {
-        serverList.innerHTML = '';
-        serverConfigs.forEach(server => {
-          const li = document.createElement('li');
-          li.id = `server-${server.name.replace(/\./g, '-')}`;
-          li.innerHTML = `<i class="fas fa-server"></i> ${server.name}`;
-          serverList.appendChild(li);
-        });
-        totalServersElement.textContent = serverConfigs.length;
-      };
-      
-      // Check a single server with multiple protocol/port combinations
-      const checkServer = async (server) => {
-        const serverElement = document.getElementById(`server-${server.name.replace(/\./g, '-')}`);
-        
-        for (const protocol of server.protocols) {
-          for (const port of server.ports) {
-            const url = `${protocol}${server.name}${port}`;
-            try {
-              // Use fetch with timeout to check server availability
-              const controller = new AbortController();
-              const timeoutId = setTimeout(() => controller.abort(), 5000);
-              
-              const response = await fetch(url, { 
-                mode: 'no-cors', 
-                signal: controller.signal
-              });
-              
-              clearTimeout(timeoutId);
-              
-              // If we got here, the server is probably available
-              availableServers.push({
-                name: server.name,
-                url: url
-              });
-              
-              if (serverElement) {
-                serverElement.classList.add('active');
-                serverElement.innerHTML = `<i class="fas fa-check-circle"></i> ${server.name} (متاح)`;
-              }
-              
-              return true;
-            } catch (err) {
-              // Continue to next combination
-              continue;
-            }
-          }
-        }
-        
-        // If we get here, all combinations failed
-        if (serverElement) {
-          serverElement.classList.add('failed');
-          serverElement.innerHTML = `<i class="fas fa-times-circle"></i> ${server.name} (غير متاح)`;
-        }
-        
-        return false;
-      };
-      
-      // Check all servers
-      const checkAllServers = async () => {
-        if (isCheckingServers) return;
-        
-        isCheckingServers = true;
-        availableServers = [];
-        statusIndicator.style.display = 'flex';
-        errorMsg.style.display = 'none';
-        statusText.textContent = 'جاري التحقق من الخوادم المتاحة...';
-        
-        populateServerList();
-        
-        for (const server of serverConfigs) {
-          await checkServer(server);
-        }
-        
-        if (availableServers.length > 0) {
-          statusText.textContent = `تم العثور على ${availableServers.length} خوادم متاحة`;
-          currentServerIndex = 0;
-          loadServer(availableServers[0]);
-          startServerSwitching();
-        } else {
-          statusText.textContent = 'لم يتم العثور على خوادم متاحة. يرجى المحاولة مرة أخرى أو استخدام شبكة مختلفة.';
-          errorMsg.textContent = 'جميع الخوادم غير متاحة حالياً';
-          errorMsg.style.display = 'block';
-          iframe.src = '';
-        }
-        
-        isCheckingServers = false;
-      };
-      
-      // Load a server in the iframe
-      const loadServer = (server) => {
-        statusText.textContent = `جاري تحميل ${server.name}...`;
-        errorMsg.style.display = 'none';
-        iframe.style.opacity = '0.5';
-        
-        setTimeout(() => {
-          try {
-            iframe.src = server.url;
-            currentServerElement.textContent = availableServers.indexOf(server) + 1;
-            iframe.style.opacity = '1';
-            
-            // Update UI
-            document.querySelectorAll('#serverList li').forEach(li => {
-              li.classList.remove('active', 'current');
-            });
-            
-            const serverElement = document.getElementById(`server-${server.name.replace(/\./g, '-')}`);
-            if (serverElement) {
-              serverElement.classList.add('active', 'current');
-            }
-            
-            statusText.textContent = `تم تحميل ${server.name} بنجاح`;
-          } catch (error) {
-            errorMsg.textContent = `فشل في تحميل ${server.name}: ${error.message}`;
-            errorMsg.style.display = 'block';
-            nextServer();
-          }
-        }, 1000);
-      };
-      
-      // Move to next server
-      const nextServer = () => {
-        if (availableServers.length === 0) return;
-        
-        currentServerIndex = (currentServerIndex + 1) % availableServers.length;
-        loadServer(availableServers[currentServerIndex]);
-      };
-      
-      // Start automatic server switching
-      const startServerSwitching = () => {
-        if (serverSwitchInterval) clearInterval(serverSwitchInterval);
-        
-        serverSwitchInterval = setInterval(() => {
-          if (availableServers.length > 1) {
-            nextServer();
-          }
-        }, 15000); // Switch every 15 seconds
-      };
-      
-      // Handle iframe load events
-      iframe.addEventListener('load', () => {
-        iframe.style.opacity = '1';
-        statusText.textContent = `تم تحميل ${availableServers[currentServerIndex]?.name || 'الخادم'} بنجاح`;
-      });
-      
-      // Handle iframe error events
-      iframe.addEventListener('error', () => {
-        errorMsg.textContent = 'فشل في تحميل الخادم - جاري المحاولة التالية...';
-        errorMsg.style.display = 'block';
-        nextServer();
-      });
-      
-      // Retry button click handler
-      retryButton.addEventListener('click', () => {
-        checkAllServers();
-      });
-      
-      // Initialize
-      populateServerList();
-      startCountdown();
-      
-      // After countdown finishes, check servers
-      setTimeout(() => {
-        if (availableServers.length === 0) {
-          checkAllServers();
-        }
-      }, 5500);
-    });
-  </script>
 </body>
 </html>
