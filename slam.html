@@ -1,418 +1,248 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>تخطي تحديد السرعة لـ slam</title>
-  <!-- الخطوط والأيقونات -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --bg-color: #f5f7fa;
-      --container-bg: #ffffff;
-      --text-color: #2d3748;
-      --heading-color: #1a202c;
-      /* الألوان الأساسية باستخدام اللون المطلوب */
-      --primary-color: #00b03e;
-      --primary-light: #33c55d;
-      --primary-dark: #008c2c;
-      --accent-color: #009c35;
-      --border-radius: 12px;
-      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --transition: all 0.3s ease;
-    }
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5; URL=ITC.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>تخطي تحديد السرعة لـ ITC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #8B0000;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --bg-light: #f8f9fa;
+            --bg-dark: #2c2c2c;
+            --text-light: #ffffff;
+            --text-dark: #212529;
+        }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg-color: #121212;
-        --container-bg: #1e1e1e;
-        --text-color: #e2e8f0;
-        --heading-color: #f7fafc;
-        --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
-      }
-    }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-light: #2c2c2c;
+                --text-dark: #ffffff;
+                --primary-color: #a00000;
+            }
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-    body {
-      font-family: 'Cairo', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
 
-    /* شريط الإشعار */
-    .notification-bar {
-      background-color: var(--primary-color);
-      color: #fff;
-      text-align: center;
-      padding: 10px 15px;
-      font-size: 1rem;
-      font-weight: 600;
-      width: 100%;
-      border-radius: var(--border-radius);
-      margin-bottom: 1.5rem;
-      box-shadow: var(--shadow);
-    }
+        .progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
 
-    .container {
-      max-width: 1000px;
-      width: 100%;
-      padding: 2rem;
-      background-color: var(--container-bg);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
 
-    h1, h2, h3 {
-      color: var(--heading-color);
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
+        .status {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-top: 0.5rem;
-      position: relative;
-      display: inline-block;
-      padding-bottom: 0.5rem;
-    }
+        .server-status {
+            margin: 1rem 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
-    h1::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 25%;
-      width: 50%;
-      height: 3px;
-      background: linear-gradient(to right, var(--primary-light), var(--primary-dark));
-      border-radius: 3px;
-    }
+        .server-status.success {
+            background-color: var(--success-color);
+            color: white;
+        }
 
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #555;
-      margin: 1rem 0 2rem;
-    }
-
-    .countdown-container {
-      display: flex;
-      justify-content: center;
-      margin: 2rem 0;
-    }
-
-    .countdown-circle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 180px;
-      height: 180px;
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      color: white;
-      font-size: 4rem;
-      font-weight: 700;
-      border-radius: 50%;
-      box-shadow: 0 10px 20px rgba(0, 176, 62, 0.3);
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .countdown-circle::before {
-      content: "";
-      position: absolute;
-      width: 90%;
-      height: 90%;
-      border-radius: 50%;
-      border: 2px dashed rgba(255, 255, 255, 0.4);
-      animation: rotate 10s linear infinite;
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .countdown-circle:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 25px rgba(0, 176, 62, 0.4);
-    }
-
-    .provider-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin: 2.5rem 0;
-      width: 100%;
-    }
-
-    .provider-card {
-      background: var(--container-bg);
-      border: 1px solid rgba(0, 176, 62, 0.2);
-      border-radius: var(--border-radius);
-      overflow: hidden;
-      transition: var(--transition);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      position: relative;
-    }
-
-    .provider-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 15px rgba(0, 176, 62, 0.2);
-      border-color: var(--primary-light);
-    }
-
-    .provider-card a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1.5rem 1rem;
-      color: var(--text-color);
-      text-decoration: none;
-      height: 100%;
-    }
-
-    .provider-card .icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: var(--primary-color);
-      transition: var(--transition);
-    }
-
-    .provider-card:hover .icon {
-      transform: scale(1.2);
-      color: var(--primary-light);
-    }
-
-    .provider-card .name {
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    .server-list {
-      background: rgba(0, 176, 62, 0.05);
-      padding: 1.5rem;
-      border-radius: var(--border-radius);
-      margin: 2.5rem 0;
-      width: 100%;
-    }
-
-    .server-list h3 {
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-    }
-
-    .server-list ul {
-      list-style-type: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1rem;
-    }
-
-    .server-list li {
-      padding: 1rem;
-      background: var(--container-bg);
-      border-radius: var(--border-radius);
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      transition: var(--transition);
-      border-left: 3px solid var(--primary-color);
-    }
-
-    .server-list li:hover {
-      box-shadow: 0 5px 10px rgba(0, 176, 62, 0.1);
-      transform: translateX(5px);
-    }
-
-    .server-list li i {
-      color: var(--primary-color);
-      font-size: 1.2rem;
-    }
-
-    .contact-button {
-      display: block;
-      width: fit-content;
-      margin: 2rem auto 0;
-      padding: 0.8rem 2rem;
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      color: white;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: var(--transition);
-      box-shadow: 0 4px 10px rgba(0, 176, 62, 0.3);
-    }
-
-    .contact-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0, 176, 62, 0.4);
-    }
-
-    .contact-button i {
-      margin-left: 0.5rem;
-    }
-
-    /* عناصر مخفية */
-    .none {
-      display: none;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 1.5rem;
-      }
-
-      .provider-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .countdown-circle {
-        width: 150px;
-        height: 150px;
-        font-size: 3rem;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      h2 {
-        font-size: 1.2rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .provider-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .server-list ul {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+        .server-status.danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+    </style>
 </head>
 <body>
-  <!-- شريط الإشعار -->
-  <div class="notification-bar">
-    <i class="fas fa-info-circle"></i> مع تحيات يزيد❤️
-  </div>
+    <div class="container">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ ITC
+        </h1>
 
-  <div class="container">
-    <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ slam</h1>
-    <h2><i class="fas fa-sync-alt spin"></i> الرجاء انتظار التحويل التلقائي خلال <span id="countdown-text">5</span> ثوانٍ</h2>
+        <div class="status">
+            <div id="connection-status">جارٍ الاتصال...</div>
+            <div id="refresh-timer">التحديث التلقائي بعد <span id="countdown">5</span> ثوان</div>
+        </div>
 
-    <div class="countdown-container">
-      <div class="countdown-circle" id="countdown">5</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+
+        <div class="server-status" id="server-status">
+            جارٍ التحقق من الخوادم...
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-primary" onclick="toggleTheme()">
+                <i class="fas fa-adjust"></i> تغيير الثيم
+            </button>
+        </div>
+
+        <div class="mt-4">
+            <h3>الخوادم النشطة:</h3>
+            <ul id="active-servers" class="list-group"></ul>
+        </div>
     </div>
 
-    <div class="provider-grid">
-      <div class="provider-card">
-        <a href="STC.html">
-          <div class="icon"><i class="fas fa-bolt"></i></div>
-          <div class="name">STC</div>
-        </a>
-      </div>
-      <div class="provider-card">
-        <a href="MOBILY.html">
-          <div class="icon"><i class="fas fa-wifi"></i></div>
-          <div class="name">Mobily</div>
-        </a>
-      </div>
-      <div class="provider-card">
-        <a href="ZAIN.html">
-          <div class="icon"><i class="fas fa-signal"></i></div>
-          <div class="name">Zain</div>
-        </a>
-      </div>
-      <div class="provider-card">
-        <a href="slam.html">
-          <div class="icon"><i class="fas fa-network-wired"></i></div>
-          <div class="name">slam</div>
-        </a>
-      </div>
-      <div class="provider-card">
-        <a href="GO.html">
-          <div class="icon"><i class="fas fa-rocket"></i></div>
-          <div class="name">GO</div>
-        </a>
-      </div>
-    </div>
+    <script>
+        const SERVERS = {
+            itc: [
+                "https://87.101.144.21:8080/speedtest/upload.php",
+                "https://ftthspeed-ruh.itc.sa:8080/speedtest/upload.php",
+                "https://jed-speed.itc.net.sa:8080/speedtest/upload.php"
+            ]
+        };
 
-    <div class="server-list">
-      <h3><i class="fas fa-server"></i> الخوادم المستخدمة</h3>
-      <ul>
-        <li><i class="fas fa-link"></i> 87.101.144.21:8080</li>
-        <li><i class="fas fa-link"></i> ftthspeed-ruh.itc.sa:8080</li>
-        <li><i class="fas fa-link"></i> jed-speed.itc.net.sa:8080</li>
-      </ul>
-    </div>
+        let activeServers = [];
+        let refreshInterval;
 
-    <a href="https://t.me/jljal/" class="contact-button">
-      للتواصل <i class="fab fa-telegram"></i>
-    </a>
-  </div>
+        document.addEventListener('DOMContentLoaded', () => {
+            startProgress();
+            checkServers();
+            updateCountdown();
+            registerServiceWorker();
+        });
 
-  <!-- iframes مخفية للخوادم -->
-  <iframe class="none" src="https://87.101.144.21:8080/speedtest/upload.php"></iframe>
-  <iframe class="none" src="https://ftthspeed-ruh.itc.sa:8080/speedtest/upload.php"></iframe>
-  <iframe class="none" src="https://jed-speed.itc.net.sa:8080/speedtest/upload.php"></iframe>
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker Registered'))
+                    .catch(err => console.log('Service Worker Failed:', err));
+            }
+        }
 
-  <script>
-    let countdown = 5;
-    const countdownElement = document.getElementById('countdown');
-    const countdownTextElement = document.getElementById('countdown-text');
+        async function checkServers() {
+            const serverList = SERVERS.itc;
+            const results = await Promise.allSettled(
+                serverList.map(server => 
+                    fetch(server, { method: 'HEAD', mode: 'no-cors' })
+                        .then(() => ({ server, status: 'success' }))
+                        .catch(() => ({ server, status: 'failed' }))
+                )
+            );
 
-    function updateCountdown() {
-      countdownElement.textContent = countdown;
-      countdownTextElement.textContent = countdown;
-      
-      if(countdown <= 0) {
-        window.location.href = 'slam.html';
-        return;
-      }
-      
-      countdownElement.style.transform = 'scale(1.1)';
-      setTimeout(() => {
-        countdownElement.style.transform = 'scale(1)';
-      }, 200);
-      
-      countdown--;
-    }
+            activeServers = results
+                .filter(r => r.status === 'fulfilled' && r.value.status === 'success')
+                .map(r => r.value.server);
 
-    window.addEventListener('DOMContentLoaded', () => {
-      setInterval(updateCountdown, 1000);
-    });
+            updateServerList();
+        }
 
-    // تأثير حركة الأيقونات في بطاقات المزودين
-    document.querySelectorAll('.provider-card').forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        const icon = card.querySelector('.icon i');
-        icon.classList.add('fa-beat');
-      });
-      
-      card.addEventListener('mouseleave', () => {
-        const icon = card.querySelector('.icon i');
-        icon.classList.remove('fa-beat');
-      });
-    });
-  </script>
+        function updateServerList() {
+            const list = document.getElementById('active-servers');
+            list.innerHTML = activeServers.map(server => 
+                `<li class="list-group-item">${server}</li>`
+            ).join('');
+
+            const statusEl = document.getElementById('server-status');
+            if (activeServers.length > 0) {
+                statusEl.className = 'server-status success';
+                statusEl.textContent = `تم تفعيل ${activeServers.length} خوادم`;
+            } else {
+                statusEl.className = 'server-status danger';
+                statusEl.textContent = 'لا توجد خوادم نشطة';
+            }
+        }
+
+        function startProgress() {
+            const progress = document.getElementById('progress');
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) clearInterval(interval);
+                width += 2;
+                progress.style.width = width + '%';
+            }, 100);
+        }
+
+        function updateCountdown() {
+            let timeLeft = 5;
+            const countdown = document.getElementById('countdown');
+            refreshInterval = setInterval(() => {
+                timeLeft--;
+                countdown.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(refreshInterval);
+                    window.location.reload();
+                }
+            }, 1000);
+        }
+
+        function toggleTheme() {
+            document.body.style.backgroundColor = 
+                document.body.style.backgroundColor === 'var(--bg-light)' 
+                ? 'var(--bg-dark)' 
+                : 'var(--bg-light)';
+            document.body.style.color = 
+                document.body.style.color === 'var(--text-dark)' 
+                ? 'var(--text-light)' 
+                : 'var(--text-dark)';
+        }
+
+        setInterval(() => {
+            if (activeServers.length === 0) return;
+            const server = activeServers[Math.floor(Math.random() * activeServers.length)];
+            fetch(server, { 
+                method: 'HEAD', 
+                mode: 'no-cors',
+                headers: { 'User-Agent': getRandomUserAgent() }
+            });
+        }, Math.random() * 5000 + 3000);
+
+        function getRandomUserAgent() {
+            const agents = [
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+            ];
+            return agents[Math.floor(Math.random() * agents.length)];
+        }
+    </script>
+    <script>
+        // Service Worker script (sw.js)
+        self.addEventListener('install', event => {
+            self.skipWaiting();
+        });
+
+        self.addEventListener('activate', event => {
+            clients.claim();
+        });
+
+        self.addEventListener('fetch', event => {
+            if (event.request.url.includes('speedtest')) {
+                event.respondWith(
+                    fetch(event.request)
+                        .catch(() => new Response('Service Unavailable', { status: 503 }))
+                );
+            }
+        });
+    </script>
 </body>
 </html>
