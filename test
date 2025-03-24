@@ -2,507 +2,360 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5; URL=STC.html">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>تخطي تحديد السرعة لـ STC</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --bg-color: #f5f7fa;
-            --container-bg: #ffffff;
-            --text-color: #2d3748;
-            --heading-color: #1a202c;
-            --primary-color: #6a1b9a;
-            --primary-light: #9c27b0;
-            --primary-dark: #4a148c;
-            --accent-color: #8e24aa;
-            --border-radius: 12px;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        /* Improved CSS with dark mode and animations */
+            :root {
+            --primary: #5c2a8a;
+            --success: #28a745;
+            --danger: #dc3545;
+            --dark: #1e0729;
+            --light: #f8f9fa;
+            --border-radius: 10px;
             --transition: all 0.3s ease;
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #121212;
-                --container-bg: #1e1e1e;
-                --text-color: #e2e8f0;
-                --heading-color: #f7fafc;
-                --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
+            font-family: 'Tajawal', sans-serif;
+            background: var(--dark);
+            color: white;
+            padding: 20px;
+            transition: var(--transition);
         }
 
         .container {
-            max-width: 1000px;
-            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--dark);
             padding: 2rem;
-            background-color: var(--container-bg);
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
         }
 
-        h1, h2, h3 {
-            color: var(--heading-color);
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-top: 0.5rem;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 0.5rem;
-        }
-
-        h1::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary-light), var(--primary-dark));
-            border-radius: 3px;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #555;
-            margin: 1rem 0 2rem;
-        }
-
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            margin: 2rem 0;
-        }
-
-        .countdown-circle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            font-size: 4rem;
-            font-weight: 700;
-            border-radius: 50%;
-            box-shadow: 0 10px 20px rgba(106, 27, 154, 0.3);
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .countdown-circle::before {
-            content: "";
-            position: absolute;
-            width: 90%;
-            height: 90%;
-            border-radius: 50%;
-            border: 2px dashed rgba(255, 255, 255, 0.4);
-            animation: rotate 10s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .countdown-circle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 25px rgba(106, 27, 154, 0.4);
-        }
-
+        /* Provider Grid */
         .provider-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1.5rem;
-            margin: 2.5rem 0;
-            width: 100%;
+            margin-bottom: 2rem;
         }
 
         .provider-card {
-            background: var(--container-bg);
-            border: 1px solid rgba(106, 27, 154, 0.2);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: var(--border-radius);
             overflow: hidden;
             transition: var(--transition);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
+            backdrop-filter: blur(10px);
         }
 
-        .provider-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(106, 27, 154, 0.2);
-            border-color: var(--primary-light);
-        }
-
-        .provider-card a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.5rem 1rem;
-            color: var(--text-color);
-            text-decoration: none;
-            height: 100%;
-        }
-
-        .provider-card .icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            transition: var(--transition);
-        }
-
-        .provider-card:hover .icon {
-            transform: scale(1.2);
-            color: var(--primary-light);
-        }
-
-        .provider-card .name {
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .server-list {
-            background: rgba(106, 27, 154, 0.05);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin: 2.5rem 0;
-            width: 100%;
-        }
-
-        .server-list h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-
-        .server-list ul {
-            list-style-type: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-        }
-
-        .server-list li {
-            padding: 1rem;
-            background: var(--container-bg);
-            border-radius: var(--border-radius);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            border-left: 3px solid var(--primary-color);
-        }
-
-        .server-list li:hover {
-            box-shadow: 0 5px 10px rgba(106, 27, 154, 0.1);
-            transform: translateX(5px);
-        }
-
-        .server-list li i {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-
-        .contact-button {
-            display: block;
-            width: fit-content;
-            margin: 2rem auto 0;
-            padding: 0.8rem 2rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: 0 4px 10px rgba(106, 27, 154, 0.3);
-        }
-
-        .contact-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(106, 27, 154, 0.4);
-        }
-
-        .contact-button i {
-            margin-left: 0.5rem;
-        }
-
-        .speedtest-section {
-            width: 100%;
-            margin: 2rem 0;
-            background: var(--container-bg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        .server-header {
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .server-header h3 {
-            margin: 0;
-            font-size: 1.2rem;
-        }
-
-        .server-counter {
-            margin-left: auto;
-            font-weight: bold;
-        }
-
-        #speedTestIframe {
-            width: 100%;
-            height: 500px;
-            border: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .loading-indicator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 5px;
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1.5rem;
+            .provider-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                border-color: var(--primary);
             }
 
-            .provider-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .provider-card.active {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 2px var(--primary);
             }
 
-            .countdown-circle {
-                width: 150px;
-                height: 150px;
+            .provider-card a {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 1rem;
+                color: white;
+                text-decoration: none;
+                transition: var(--transition);
+            }
+
+            .provider-icon {
                 font-size: 3rem;
+                margin-bottom: 1rem;
+                transition: var(--transition);
             }
 
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.2rem;
-            }
-
-            #speedTestIframe {
-                height: 300px;
-            }
+        /* Progress Section */
+        .progress-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1rem 0;
         }
 
-        @media (max-width: 480px) {
-            .provider-grid {
-                grid-template-columns: 1fr;
-            }
+        .progress-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
 
-            .server-list ul {
-                grid-template-columns: 1fr;
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0;
+            transition: width 0.3s;
+        }
+
+        /* Server List */
+        .server-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .server-item {
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--border-radius);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .status-icon {
+            animation: pulse 2s infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .provider-card {
+                flex-direction: row;
+                padding: 1rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة</h1>
-        <h2><i class="fas fa-sync-alt spin"></i> الرجاء انتظار التحويل التلقائي خلال <span id="countdown-text">5</span> ثوانٍ</h2>
-
-        <div class="countdown-container">
-            <div class="countdown-circle" id="countdown">5</div>
-        </div>
-
-        <div class="speedtest-section">
-            <div class="server-header">
-                <i class="fas fa-tachometer-alt"></i>
-                <h3>اختبار السرعة الحي</h3>
-                <div class="server-counter">
-                    <span id="current-server">1</span>/8
-                </div>
-            </div>
-            <iframe id="speedTestIframe" 
-                    title="اختبار سرعة الإنترنت"
-                    loading="lazy"
-                    allowfullscreen></iframe>
-        </div>
+        <header class="text-center mb-4">
+            <h1><i class="fas fa-rocket"></i> تخطي تحديد السرعة</h1>
+            <p>اختر مزود الخدمة الخاص بك</p>
+        </header>
 
         <div class="provider-grid">
-            <div class="provider-card">
-                <a href="STC.html" rel="noopener noreferrer">
-                    <div class="icon"><i class="fas fa-bolt"></i></div>
-                    <div class="name">STC</div>
-                </a>
-            </div>
-            <div class="provider-card">
-                <a href="MOBILY.html" rel="noopener noreferrer">
-                    <div class="icon"><i class="fas fa-wifi"></i></div>
-                    <div class="name">Mobily</div>
-                </a>
-            </div>
-            <div class="provider-card">
-                <a href="ZAIN.html" rel="noopener noreferrer">
-                    <div class="icon"><i class="fas fa-signal"></i></div>
-                    <div class="name">Zain</div>
-                </a>
-            </div>
-            <div class="provider-card">
-                <a href="slam.html" rel="noopener noreferrer">
-                    <div class="icon"><i class="fas fa-network-wired"></i></div>
-                    <div class="name">ITC</div>
-                </a>
-            </div>
-            <div class="provider-card">
-                <a href="GO.html" rel="noopener noreferrer">
-                    <div class="icon"><i class="fas fa-rocket"></i></div>
-                    <div class="name">GO</div>
-                </a>
-            </div>
-        </div>
-
-        <div class="server-list">
-            <h3><i class="fas fa-server"></i> الخوادم المستخدمة</h3>
-            <ul>
-                <li><i class="fas fa-link"></i> speedtest.saudi.net.sa:8080</li>
-                <li><i class="fas fa-link"></i> dam-speedtest.saudi.net.sa:8080</li>
-                <li><i class="fas fa-link"></i> jed-speedtest.saudi.net.sa:8080</li>
-                <li><i class="fas fa-link"></i> speedtest.saudi.net.sa.prod.hosts.ooklaserver.net:8080</li>
-                <li><i class="fas fa-link"></i> riy-speedtest.saudi.net.sa:8080</li>
-                <li><i class="fas fa-link"></i> med-speedtest.saudi.net.sa:8080</li>
-                <li><i class="fas fa-link"></i> tab-speedtest.saudi.net.sa:8080</li>
-                <li><i class="fas fa-link"></i> abh-speedtest.saudi.net.sa:8080</li>
-            </ul>
-        </div>
-
-        <a href="https://t.me/jljal/" class="contact-button" rel="noopener noreferrer">
-            للتواصل <i class="fab fa-telegram"></i>
+    <div class="provider-card" data-provider="stc">
+        <a href="#">
+            <i class="fas fa-satellite-dish provider-icon"></i>
+            <span class="provider-name">STC</span>
         </a>
+    </div>
+    <div class="provider-card" data-provider="mobily">
+        <a href="#">
+            <i class="fas fa-tower-cell provider-icon"></i>
+            <span class="provider-name">Mobily</span>
+        </a>
+    </div>
+    <div class="provider-card" data-provider="zain">
+        <a href="#">
+            <i class="fas fa-tower-observation provider-icon"></i>
+            <span class="provider-name">Zain</span>
+        </a>
+    </div>
+    <div class="provider-card" data-provider="GO">
+        <a href="#">
+            <i class="fas fa-bolt-lightning provider-icon"></i>
+            <span class="provider-name">GO</span>
+        </a>
+    </div>
+    <div class="provider-card" data-provider="ITC">
+        <a href="#">
+            <i class="fas fa-wifi provider-icon"></i>
+            <span class="provider-name">ITC</span>
+        </a>
+    </div>
+</div>
+
+        <div class="status">
+            <div id="connection-status">جارٍ الاتصال...</div>
+            <div id="refresh-timer">التحديث التلقائي بعد <span id="countdown">5</span> ثوان</div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+
+        <div class="server-status" id="server-status">
+            جارٍ التحقق من الخوادم...
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-primary" onclick="toggleTheme()">
+                <i class="fas fa-adjust"></i> تغيير الثيم
+            </button>
+        </div>
+
+        <div class="mt-4">
+            <h3>الخوادم النشطة:</h3>
+            <ul id="active-servers" class="list-group"></ul>
+        </div>
+    </div>
+
+
+        <footer class="text-center mt-5">
+            <a href="https://t.me/jljal" class="telegram-link">
+                <i class="fab fa-telegram"></i> الدعم الفني
+            </a>
+        </footer>
     </div>
 
     <script>
+        // Configuration
+        const SERVERS = {
+            stc: [
+                "https://speedtest.saudi.net.sa:8080/speedtest/upload.php",
+                "https://dam-speedtest.saudi.net.sa:8080/speedtest/upload.php",
+                "https://jed-speedtest.saudi.net.sa:8080/speedtest/upload.php",
+                "https://riy-speedtest.saudi.net:8080/speedtest/upload.php",
+                "https://med-speedtest.saudi.net.sa:8080/speedtest/upload.php"
+            ],
+            mobily: [
+                // Add Mobily servers here
+            ],
+            zain: [
+                // Add Zain servers here
+            ]
+        };
+
+        // State variables
+        let currentTheme = 'light';
+        let activeServers = [];
+        let refreshInterval;
+
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            // Countdown Timer
-            let countdown = 5;
-            const countdownElement = document.getElementById('countdown');
-            const countdownTextElement = document.getElementById('countdown-text');
-            
-            function updateCountdown() {
-                countdownElement.textContent = countdown;
-                countdownTextElement.textContent = countdown;
-                
-                if(countdown <= 0) {
-                    window.location.href = 'STC.html';
-                    return;
+            startProgress();
+            checkServers();
+            updateCountdown();
+            registerServiceWorker();
+        });
+
+        // Service Worker Registration
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker Registered'))
+                    .catch(err => console.log('Service Worker Failed:', err));
+            }
+        }
+
+        // Server checking with retries
+        async function checkServers() {
+            const serverList = SERVERS.stc; // Change based on ISP detection
+            const results = await Promise.allSettled(
+                serverList.map(server => 
+                    fetch(server, { method: 'HEAD', mode: 'no-cors' })
+                        .then(() => ({ server, status: 'success' }))
+                        .catch(() => ({ server, status: 'failed' }))
+                )
+            );
+
+            activeServers = results
+                .filter(r => r.status === 'fulfilled' && r.value.status === 'success')
+                .map(r => r.value.server);
+
+            updateServerList();
+        }
+
+        // Update server display
+        function updateServerList() {
+            const list = document.getElementById('active-servers');
+            list.innerHTML = activeServers.map(server => 
+                `<li class="list-group-item">${server}</li>`
+            ).join('');
+
+            const statusEl = document.getElementById('server-status');
+            if (activeServers.length > 0) {
+                statusEl.className = 'server-status success';
+                statusEl.textContent = `تم تفعيل ${activeServers.length} خوادم`;
+            } else {
+                statusEl.className = 'server-status danger';
+                statusEl.textContent = 'لا توجد خوادم نشطة';
+            }
+        }
+
+        // Progress bar animation
+        function startProgress() {
+            const progress = document.getElementById('progress');
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) clearInterval(interval);
+                width += 2;
+                progress.style.width = width + '%';
+            }, 100);
+        }
+
+        // Countdown timer
+        function updateCountdown() {
+            let timeLeft = 5;
+            const countdown = document.getElementById('countdown');
+            refreshInterval = setInterval(() => {
+                timeLeft--;
+                countdown.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(refreshInterval);
+                    window.location.reload();
                 }
-                
-                countdownElement.style.transform = 'scale(1.1)';
-                setTimeout(() => {
-                    countdownElement.style.transform = 'scale(1)';
-                }, 200);
-                
-                countdown--;
-            }
-            const countdownInterval = setInterval(updateCountdown, 1000);
+            }, 1000);
+        }
 
-            // Speed Test
-            const servers = [
-                'speedtest.saudi.net.sa:8080',
-                'dam-speedtest.saudi.net.sa:8080',
-                'jed-speedtest.saudi.net.sa:8080',
-                'speedtest.saudi.net.sa.prod.hosts.ooklaserver.net:8080',
-                'riy-speedtest.saudi.net.sa:8080',
-                'med-speedtest.saudi.net.sa:8080',
-                'tab-speedtest.saudi.net.sa:8080',
-                'abh-speedtest.saudi.net.sa:8080'
+        // Theme toggle
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.body.style.backgroundColor = 
+                currentTheme === 'light' ? '#f8f9fa' : '#343a40';
+            document.body.style.color = 
+                currentTheme === 'light' ? '#212529' : '#ffffff';
+        }
+
+        // Periodic server pings
+        setInterval(() => {
+            if (activeServers.length === 0) return;
+            const server = activeServers[Math.floor(Math.random() * activeServers.length)];
+            fetch(server, { 
+                method: 'HEAD', 
+                mode: 'no-cors',
+                headers: { 'User-Agent': getRandomUserAgent() }
+            });
+        }, Math.random() * 5000 + 3000); // 3-8s random interval
+
+        // User agent rotation
+        function getRandomUserAgent() {
+            const agents = [
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
             ];
+            return agents[Math.floor(Math.random() * agents.length)];
+        }
+    </script>
+    <script>
+        // Service Worker script (sw.js)
+        self.addEventListener('install', event => {
+            self.skipWaiting();
+        });
 
-            let currentServerIndex = 0;
-            const iframe = document.getElementById('speedTestIframe');
-            const serverCounter = document.getElementById('current-server');
-            const loadingIndicator = document.querySelector('.loading-indicator');
+        self.addEventListener('activate', event => {
+            clients.claim();
+        });
 
-            function showLoading() {
-                loadingIndicator.style.display = 'block';
+        self.addEventListener('fetch', event => {
+            if (event.request.url.includes('speedtest')) {
+                event.respondWith(
+                    fetch(event.request)
+                        .catch(() => new Response('Service Unavailable', { status: 503 }))
+                );
             }
-
-            function hideLoading() {
-                loadingIndicator.style.display = 'none';
-            }
-
-            function loadNextServer() {
-                showLoading();
-                iframe.style.opacity = '0';
-                
-                setTimeout(() => {
-                    try {
-                        iframe.src = `https://${servers[currentServerIndex]}/`;
-                        serverCounter.textContent = currentServerIndex + 1;
-                        currentServerIndex = (currentServerIndex + 1) % servers.length;
-                    } catch (error) {
-                        console.error('Error loading server:', error);
-                    }
-                    
-                    iframe.style.opacity = '1';
-                    hideLoading();
-                }, 500);
-            }
-
-            iframe.addEventListener('error', () => {
-                console.error('فشل تحميل الخادم');
-                hideLoading();
-                loadNextServer();
-            });
-
-            // Provider Card Hover Effects
-            document.querySelectorAll('.provider-card').forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    const icon = card.querySelector('.icon i');
-                    icon.classList.add('fa-beat');
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    const icon = card.querySelector('.icon i');
-                    icon.classList.remove('fa-beat');
-                });
-            });
-
-            // Initial Load
-            loadNextServer();
-            const serverInterval = setInterval(loadNextServer, 10000);
         });
     </script>
 </body>
