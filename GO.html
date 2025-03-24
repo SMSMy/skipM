@@ -2,367 +2,245 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5; URL=GO.html">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>تخطي تحديد السرعة لـ GO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #f5f7fa;
-            --container-bg: #ffffff;
-            --text-color: #2d3748;
-            --heading-color: #1a202c;
-            --primary-color: #20c6ba;
-            --primary-light: #28e0d3;
-            --primary-dark: #1a9f8e;
-            --border-radius: 12px;
-            --shadow: 0 10px 15px -3px rgba(32, 198, 186, 0.1), 0 4px 6px -2px rgba(32, 198, 186, 0.05);
-            --transition: all 0.3s ease;
+            --primary-color: #8B0000;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --bg-light: #f8f9fa;
+            --bg-dark: #2c2c2c;
+            --text-light: #ffffff;
+            --text-dark: #212529;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-color: #121212;
-                --container-bg: #1e1e1e;
-                --text-color: #e2e8f0;
-                --heading-color: #f7fafc;
-                --primary-color: #28e0d3;
-                --primary-light: #32f5e8;
-                --primary-dark: #1eb5a9;
-                --shadow: 0 10px 15px -3px rgba(40, 224, 211, 0.3), 0 4px 6px -2px rgba(40, 224, 211, 0.1);
+                --bg-light: #2c2c2c;
+                --text-dark: #ffffff;
+                --primary-color: #a00000;
             }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
         }
 
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
-            max-width: 1000px;
-            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
             padding: 2rem;
-            background-color: var(--container-bg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
 
-        h1, h2, h3 {
-            color: var(--heading-color);
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-top: 0.5rem;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 0.5rem;
-        }
-
-        h1::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary-light), var(--primary-dark));
-            border-radius: 3px;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #555;
-            margin: 1rem 0 2rem;
-        }
-
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            margin: 2rem 0;
-        }
-
-        .countdown-circle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            font-size: 4rem;
-            font-weight: 700;
-            border-radius: 50%;
-            box-shadow: 0 10px 20px rgba(32, 198, 186, 0.3);
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .countdown-circle::before {
-            content: "";
-            position: absolute;
-            width: 90%;
-            height: 90%;
-            border-radius: 50%;
-            border: 2px dashed rgba(255, 255, 255, 0.4);
-            animation: rotate 10s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .countdown-circle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 25px rgba(32, 198, 186, 0.4);
-        }
-
-        .provider-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 2.5rem 0;
-            width: 100%;
-        }
-
-        .provider-card {
-            background: var(--container-bg);
-            border: 1px solid rgba(32, 198, 186, 0.2);
-            border-radius: var(--border-radius);
+        .progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
             overflow: hidden;
-            transition: var(--transition);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
+            margin: 20px 0;
         }
 
-        .provider-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(32, 198, 186, 0.2);
-            border-color: var(--primary-light);
-        }
-
-        .provider-card a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.5rem 1rem;
-            color: var(--text-color);
-            text-decoration: none;
+        .progress-fill {
             height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s;
         }
 
-        .provider-card .icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            transition: var(--transition);
-        }
-
-        .provider-card:hover .icon {
-            transform: scale(1.2);
-            color: var(--primary-light);
-        }
-
-        .provider-card .name {
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .server-list {
-            background: rgba(32, 198, 186, 0.05);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin: 2.5rem 0;
-            width: 100%;
-        }
-
-        .server-list h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-
-        .server-list ul {
-            list-style-type: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-        }
-
-        .server-list li {
-            padding: 1rem;
-            background: var(--container-bg);
-            border-radius: var(--border-radius);
+        .status {
             display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            border-left: 3px solid var(--primary-color);
+            justify-content: space-between;
+            margin-bottom: 1rem;
         }
 
-        .server-list li:hover {
-            box-shadow: 0 5px 10px rgba(32, 198, 186, 0.1);
-            transform: translateX(5px);
+        .server-status {
+            margin: 1rem 0;
+            padding: 10px;
+            border-radius: 5px;
         }
 
-        .server-list li i {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-
-        .contact-button {
-            display: block;
-            width: fit-content;
-            margin: 2rem auto 0;
-            padding: 0.8rem 2rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+        .server-status.success {
+            background-color: var(--success-color);
             color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: 0 4px 10px rgba(32, 198, 186, 0.3);
         }
 
-        .contact-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(32, 198, 186, 0.4);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1.5rem;
-            }
-
-            .countdown-circle {
-                width: 150px;
-                height: 150px;
-                font-size: 3rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.2rem;
-            }
+        .server-status.danger {
+            background-color: var(--danger-color);
+            color: white;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1><i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ GO</h1>
-        <h2><i class="fas fa-sync-alt spin"></i> الرجاء انتظار التحويل خلال <span id="countdown-text">5</span> ثوانٍ</h2>
+        <h1 class="text-center mb-4">
+            <i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ GO
+        </h1>
 
-        <div class="countdown-container">
-            <div class="countdown-circle" id="countdown">5</div>
+        <div class="status">
+            <div id="connection-status">جارٍ الاتصال...</div>
+            <div id="refresh-timer">التحديث التلقائي بعد <span id="countdown">5</span> ثوان</div>
         </div>
 
-        <div class="provider-grid">
-            <div class="provider-card">
-                <a href="STC.html">
-                    <div class="icon"><i class="fas fa-bolt"></i></div>
-                    <div class="name">STC</div>
-                </a>
-            </div>
-            <div class="provider-card">
-                <a href="MOBILY.html">
-                    <div class="icon"><i class="fas fa-wifi"></i></div>
-                    <div class="name">Mobily</div>
-                </a>
-            </div>
-            <div class="provider-card">
-                <a href="ZAIN.html">
-                    <div class="icon"><i class="fas fa-signal"></i></div>
-                    <div class="name">Zain</div>
-                </a>
-            </div>
-            <div class="provider-card">
-                <a href="slam.html">
-                    <div class="icon"><i class="fas fa-network-wired"></i></div>
-                    <div class="name">ITC</div>
-                </a>
-            </div>
-            <div class="provider-card">
-                <a href="GO.html">
-                    <div class="icon"><i class="fas fa-rocket"></i></div>
-                    <div class="name">GO</div>
-                </a>
-            </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
         </div>
 
-        <div class="server-list">
-            <h3><i class="fas fa-server"></i> الخوادم المستخدمة</h3>
-            <ul>
-                <li><i class="fas fa-link"></i>hispeedtest.go.com.sa:8080</li>
-                <li><i class="fas fa-link"></i>speedtest.go.com.sa:8080</li>
-            </ul>
+        <div class="server-status" id="server-status">
+            جارٍ التحقق من الخوادم...
         </div>
 
-        <a href="https://t.me/jljal/" class="contact-button">
-            للتواصل <i class="fab fa-telegram"></i>
-        </a>
+        <div class="text-center mt-4">
+            <button class="btn btn-primary" onclick="toggleTheme()">
+                <i class="fas fa-adjust"></i> تغيير الثيم
+            </button>
+        </div>
+
+        <div class="mt-4">
+            <h3>الخوادم النشطة:</h3>
+            <ul id="active-servers" class="list-group"></ul>
+        </div>
     </div>
 
     <script>
-        let countdown = 5;
-        const countdownElement = document.getElementById('countdown');
-        const countdownTextElement = document.getElementById('countdown-text');
-        
-        function updateCountdown() {
-            countdownElement.textContent = countdown;
-            countdownTextElement.textContent = countdown;
-            
-            if(countdown <= 0) {
-                window.location.href = 'GO.html';
-                return;
-            }
-            
-            countdownElement.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                countdownElement.style.transform = 'scale(1)';
-            }, 200);
-            
-            countdown--;
-        }
+        const SERVERS = {
+            go: [
+                "https://hispeedtest.go.com.sa:8080/speedtest/upload.php",
+                "https://speedtest.go.com.sa:8080/speedtest/upload.php"
+            ]
+        };
 
-        window.addEventListener('DOMContentLoaded', () => {
-            setInterval(updateCountdown, 1000);
+        let activeServers = [];
+        let refreshInterval;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            startProgress();
+            checkServers();
+            updateCountdown();
+            registerServiceWorker();
         });
 
-        document.querySelectorAll('.provider-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                const icon = card.querySelector('.icon i');
-                icon.classList.add('fa-beat');
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker Registered'))
+                    .catch(err => console.log('Service Worker Failed:', err));
+            }
+        }
+
+        async function checkServers() {
+            const serverList = SERVERS.go;
+            const results = await Promise.allSettled(
+                serverList.map(server => 
+                    fetch(server, { method: 'HEAD', mode: 'no-cors' })
+                        .then(() => ({ server, status: 'success' }))
+                        .catch(() => ({ server, status: 'failed' }))
+                )
+            );
+
+            activeServers = results
+                .filter(r => r.status === 'fulfilled' && r.value.status === 'success')
+                .map(r => r.value.server);
+
+            updateServerList();
+        }
+
+        function updateServerList() {
+            const list = document.getElementById('active-servers');
+            list.innerHTML = activeServers.map(server => 
+                `<li class="list-group-item">${server}</li>`
+            ).join('');
+
+            const statusEl = document.getElementById('server-status');
+            if (activeServers.length > 0) {
+                statusEl.className = 'server-status success';
+                statusEl.textContent = `تم تفعيل ${activeServers.length} خوادم`;
+            } else {
+                statusEl.className = 'server-status danger';
+                statusEl.textContent = 'لا توجد خوادم نشطة';
+            }
+        }
+
+        function startProgress() {
+            const progress = document.getElementById('progress');
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) clearInterval(interval);
+                width += 2;
+                progress.style.width = width + '%';
+            }, 100);
+        }
+
+        function updateCountdown() {
+            let timeLeft = 5;
+            const countdown = document.getElementById('countdown');
+            refreshInterval = setInterval(() => {
+                timeLeft--;
+                countdown.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(refreshInterval);
+                    window.location.reload();
+                }
+            }, 1000);
+        }
+
+        function toggleTheme() {
+            document.body.style.backgroundColor = 
+                document.body.style.backgroundColor === 'var(--bg-light)' 
+                ? 'var(--bg-dark)' 
+                : 'var(--bg-light)';
+            document.body.style.color = 
+                document.body.style.color === 'var(--text-dark)' 
+                ? 'var(--text-light)' 
+                : 'var(--text-dark)';
+        }
+
+        setInterval(() => {
+            if (activeServers.length === 0) return;
+            const server = activeServers[Math.floor(Math.random() * activeServers.length)];
+            fetch(server, { 
+                method: 'HEAD', 
+                mode: 'no-cors',
+                headers: { 'User-Agent': getRandomUserAgent() }
             });
-            
-            card.addEventListener('mouseleave', () => {
-                const icon = card.querySelector('.icon i');
-                icon.classList.remove('fa-beat');
-            });
+        }, Math.random() * 5000 + 3000);
+
+        function getRandomUserAgent() {
+            const agents = [
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+            ];
+            return agents[Math.floor(Math.random() * agents.length)];
+        }
+    </script>
+    <script>
+        // Service Worker script (sw.js)
+        self.addEventListener('install', event => {
+            self.skipWaiting();
+        });
+
+        self.addEventListener('activate', event => {
+            clients.claim();
+        });
+
+        self.addEventListener('fetch', event => {
+            if (event.request.url.includes('speedtest')) {
+                event.respondWith(
+                    fetch(event.request)
+                        .catch(() => new Response('Service Unavailable', { status: 503 }))
+                );
+            }
         });
     </script>
 </body>
