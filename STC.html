@@ -10,36 +10,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #f8f9fa;
+            --bg-color: #f0f2f5;
             --container-bg: #ffffff;
-            --text-color: #2d3436;
-            --heading-color: #00596e;
-            --primary-color: #0088a9; /* اللون الأساسي الجديد - أزرق فيروزي */
-            --primary-hover: #006d89; /* تدرج داكن */
-            --accent-color: #ff5252; /* لون التأكيد - أحمر عصري */
-            --secondary-color: #ffd369; /* لون ثانوي - أصفر ذهبي */
-            --shadow-color: rgba(0, 136, 169, 0.2); /* ظلال بنفس التدرج */
-            --glass-bg: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --neon-glow: 0 0 10px rgba(0, 136, 169, 0.5), 0 0 20px rgba(0, 136, 169, 0.3), 0 0 30px rgba(0, 136, 169, 0.1);
+            --text-color: #333;
+            --heading-color: #2c3e50;
+            --primary-color: #34005f; /* اللون الأساسي */
+            --primary-hover: #2a004d; /* تدرج داكن */
+            --shadow-color: rgba(52, 0, 95, 0.1); /* ظلال بنفس التدرج */
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-color: #0f1923;
-                --container-bg: #1a2634;
-                --text-color: #e0e6ed;
-                --heading-color: #00b8d4;
-                --primary-color: #0088a9;
-                --primary-hover: #006d89;
-                --accent-color: #ff5252;
-                --secondary-color: #ffd369;
-                --shadow-color: rgba(0, 136, 169, 0.3);
-                --glass-bg: rgba(26, 38, 52, 0.75);
-                --glass-border: rgba(255, 255, 255, 0.08);
-                --neon-glow: 0 0 10px rgba(0, 184, 212, 0.5), 0 0 20px rgba(0, 184, 212, 0.3), 0 0 30px rgba(0, 184, 212, 0.1);
+                --bg-color: #1a1a1a;
+                --container-bg: #2c2c2c;
+                --text-color: #e0e0e0;
+                --heading-color: #ffffff;
+                --primary-color: #4a0075; /* تدرج أغمق للوضع الليلي */
+                --primary-hover: #3a005c;
+                --shadow-color: rgba(82, 0, 147, 0.1);
             }
         }
+
 
         * {
             box-sizing: border-box;
@@ -156,22 +147,7 @@
             }
         }
 
-        .notification-bar {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-            color: #fff;
-            text-align: center;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: 700;
-            position: sticky;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
-        }
+        
 
         .notification-bar i {
             margin-left: 8px;
