@@ -5,251 +5,176 @@
     <meta http-equiv="refresh" content="5; URL=STC.html">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>تخطي تحديد السرعة لـ STC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Improved CSS with dark mode and animations */
-        :root {
-            --primary-color: #34005f;
-            --primary-light: #5c2a8a;
-            --success-color: #28a745;
-            --danger-color: #dc3545;
-            --bg-light: #718eac;
-            --bg-dark: #343a40;
-            --text-light: #ffffff;
-            --text-dark: #212529;
-            --container-bg: #1e0729;
+            :root {
+            --primary: #5c2a8a;
+            --success: #28a745;
+            --danger: #dc3545;
+            --dark: #1e0729;
+            --light: #f8f9fa;
             --border-radius: 10px;
             --transition: all 0.3s ease;
-            --text-color: #ffffff;
         }
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            background: var(--dark);
+            color: white;
             padding: 20px;
-            transition: background-color 0.3s, color 0.3s;
+            transition: var(--transition);
         }
 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--dark);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 20px rgba(254, 254, 255, 0.46);
+        }
+
+        /* Provider Grid */
         .provider-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .provider-card {
-            background: var(--container-bg);
-            border: 1px solid rgba(106, 27, 154, 0.2);
+            background: rgba(175, 180, 244, 0.23);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: var(--border-radius);
             overflow: hidden;
             transition: var(--transition);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        .provider-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(106, 27, 154, 0.2);
-            border-color: var(--primary-light);
-        }
+            .provider-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px #0080ff;
+                border-color: var(--primary);
+            }
 
-        .provider-card a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem 1rem;
-            color: var(--text-color);
-            text-decoration: none;
-            height: 100%;
-        }
+            .provider-card.active {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 2px var(--primary);
+            }
 
-        .provider-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            transition: var(--transition);
-        }
+            .provider-card a {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 1rem;
+                color: white;
+                text-decoration: none;
+                transition: var(--transition);
+            }
 
-        .provider-card:hover .icon {
-            transform: scale(1.2);
-            color: var(--primary-light);
-        }
+            .provider-icon {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+                transition: var(--transition);
+            }
 
-        .provider-card .name {
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #1e0729;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            color: var(--text-light);
+        /* Progress Section */
+        .progress-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1rem 0;
         }
 
         .progress-bar {
             height: 8px;
-            background: #396692;
+            background: rgba(255,255,255,0.2);
             border-radius: 4px;
             overflow: hidden;
-            margin: 20px 0;
         }
 
         .progress-fill {
             height: 100%;
-            background: var(--primary-color);
-            width: 0%;
+            background: var(--primary);
+            width: 0;
             transition: width 0.3s;
         }
 
-        .status {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-
-        .server-status {
-            margin: 1rem 0;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .server-status.success {
-            background-color: var(--success-color);
-            color: white;
-        }
-
-        .server-status.danger {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .mb-4 {
-            margin-bottom: 1.5rem;
-        }
-
-        .mt-4 {
-            margin-top: 1.5rem;
-        }
-
-        .btn {
-            display: inline-block;
-            font-weight: 400;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            user-select: none;
-            border: 1px solid transparent;
-            padding: 0.375rem 0.75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            border-radius: 0.25rem;
-            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            color: #fff;
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-light);
-            border-color: var(--primary-light);
-        }
-
-        .list-group {
-            display: flex;
-            flex-direction: column;
-            padding-left: 0;
-            margin-bottom: 0;
+        /* Server List */
+        .server-list {
             list-style: none;
+            padding: 0;
+            margin: 1rem 0;
         }
 
-        .list-group-item {
-            position: relative;
-            display: block;
-            padding: 0.75rem 1.25rem;
-            margin-bottom: -1px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-light);
-            border-radius: 5px;
-            margin-bottom: 5px;
+        .server-item {
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--border-radius);
         }
 
-        .links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
-        .links a {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            font-weight: 600;
+        .status-icon {
+            animation: pulse 2s infinite;
         }
 
-        .links a:hover {
-            background-color: var(--primary-light);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .telegram-link {
-            display: block;
-            text-align: center;
-            margin: 1.5rem auto;
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .telegram-link i {
-            margin-left: 0.5rem;
-            color: #0088cc;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                --bg-light: #343a40;
-                --text-dark: #ffffff;
-                --primary-color: #4a0075;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .provider-card {
+                flex-direction: row;
+                padding: 1rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center mb-4">
-            <i class="fas fa-tachometer-alt"></i> تخطي تحديد السرعة لـ STC
-        </h1>
-        <div class="links">
-            <a href="STC.html">تخطي STC</a>
-            <a href="MOBILY.html">تخطي Mobily</a>
-            <a href="ZAIN.html">تخطي Zain</a>
-            <a href="ITC.html">تخطي ITC</a>
-            <a href="GO.html">تخطي GO</a>
-        </div>
-        <a href="https://t.me/jljal/" class="telegram-link">
-            <i class="fab fa-telegram"></i> للتواصل📲
+        <header class="text-center mb-4">
+            <h1><i class="fas fa-rocket"></i> تخطي تحديد السرعة STC</h1>
+            <p>اختر مزود الخدمة الخاص بك</p>
+        </header>
+
+        <div class="provider-grid">
+    <div class="provider-card" data-provider="stc">
+        <a href="#">
+            <i class="fas fa-satellite-dish provider-icon"></i>
+            <span class="provider-name">STC</span>
         </a>
+    </div>
+    <div class="provider-card" data-provider="mobily">
+        <a href="#">
+            <i class="fas fa-tower-cell provider-icon"></i>
+            <span class="provider-name">Mobily</span>
+        </a>
+    </div>
+    <div class="provider-card" data-provider="zain">
+        <a href="#">
+            <i class="fas fa-tower-observation provider-icon"></i>
+            <span class="provider-name">Zain</span>
+        </a>
+    </div>
+    <div class="provider-card" data-provider="GO">
+        <a href="#">
+            <i class="fas fa-bolt-lightning provider-icon"></i>
+            <span class="provider-name">GO</span>
+        </a>
+    </div>
+    <div class="provider-card" data-provider="ITC">
+        <a href="#">
+            <i class="fas fa-wifi provider-icon"></i>
+            <span class="provider-name">ITC</span>
+        </a>
+    </div>
+</div>
 
         <div class="status">
             <div id="connection-status">جارٍ الاتصال...</div>
@@ -274,6 +199,14 @@
             <h3>الخوادم النشطة:</h3>
             <ul id="active-servers" class="list-group"></ul>
         </div>
+    </div>
+
+
+        <footer class="text-center mt-5">
+            <a href="https://t.me/jljal" class="telegram-link">
+                <i class="fab fa-telegram"></i> الدعم الفني
+            </a>
+        </footer>
     </div>
 
     <script>
