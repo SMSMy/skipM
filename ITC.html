@@ -126,33 +126,48 @@
         .status-icon {
             animation: pulse 2s infinite;
         }
-         .github-link {
+                 .github-link {
     color: white;
     text-decoration: none;
-    margin-right: 15px;
+    margin-right: 300px;
     transition: color 0.3s ease;
 }
 
-.github-link:hover {
-    color: #8b4bff; /* لون بنفسجي فاتح */
+/* في قسم الستايل */
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--dark);
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
 }
-        
-        .telegram-link {
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.telegram-link, .github-link {
     color: white;
     text-decoration: none;
-    margin-right: 15px;
-    transition: color 0.3s ease;
+        margin-right: 293px;
+    transition: color 0.7s;
 }
 
 .telegram-link:hover {
-    color: #8b4bff; /* لون بنفسجي فاتح */
+    color: #2196F3; /* لون أزرق لتيليجرام */
+}
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .provider-card {
-                flex-direction: row;
-                padding: 1rem;
-            }
+.github-link:hover {
+    color: #8b4bff; /* لون بنفسجي لجيثب */
+}
+}
         }
     </style>
 </head>
