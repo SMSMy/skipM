@@ -1,6 +1,12 @@
 # تخطي تحديد سرعة الإنترنت (4G/5G) لشركات الاتصالات
 [<img src="https://img.shields.io/badge/Version-2.1-blue" alt="Experimental">](https://nvkq.github.io/skipM/STC.html)
+
  <img src="https://img.shields.io/badge/Status-Experimental-orange" alt="Experimental">
+ 
+<a href="https://github.com/nvkq/skipM/issues/new">
+  <img src="https://img.shields.io/badge/Report%20a%20Problem-red?style=for-the-badge" alt="Report a Problem">
+</a>
+
 
 ---
 
