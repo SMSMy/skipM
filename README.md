@@ -1,7 +1,6 @@
 # تخطي تحديد سرعة الإنترنت (4G/5G) لشركات الاتصالات
-
-<img src="https://img.shields.io/badge/Version-1.0-green" alt="Version 2.0">  
-<img src="https://img.shields.io/badge/Status-Experimental-orange" alt="Experimental">
+[<img src="https://img.shields.io/badge/Version-2.1-blue" alt="Experimental">](https://nvkq.github.io/skipM/STC.html)
+ <img src="https://img.shields.io/badge/Status-Experimental-orange" alt="Experimental">
 
 ---
 
@@ -63,4 +62,5 @@
 2. اترك الصفحة تعمل في الخلفية أثناء استخدام التطبيقات الأخرى.  
 
 > **تنويه:** النتائج تختلف حسب سياسات شركة الاتصالات ونوع الباقة.
+> > ⚠️ **تحذير**: هذا المشروع تجريبي تعليمي، استخدامه على مسؤوليتك!
 > 
