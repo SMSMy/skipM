@@ -1,0 +1,42 @@
+name: إبلاغ عن مشكلة
+description: استخدام هذا النموذج للإبلاغ عن أخطاء أو مشاكل في المشروع
+title: "[مشكلة] - "
+labels: bug
+assignees: nvkq
+
+body:
+  - type: input
+    id: prevalence
+    attributes:
+      label: تكرار المشكلة
+      description: "كم مرة تواجه هذه المشكلة؟"
+      placeholder: "مثل: عند استخدام الباقة XYZ، تحدث المشكلة يوميًا"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: وصف المشكلة
+      description: "اشرح المشكلة بالتفصيل"
+      placeholder: "مثال: السرعة تنخفض فجأة عند استخدام YouTube رغم عمل اختبار السرعة"
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: الجهاز ونظام التشغيل
+      description: "ما نوع الجهاز ونظام التشغيل المستخدم؟"
+      placeholder: "مثل: iPhone 12 (iOS 16) أو Windows 10"
+    validations:
+      required: true
+
+  - type: input
+    id: isp
+    attributes:
+      label: مزود الخدمة
+      description: "اسم شركة الاتصالات ونوع الباقة"
+      placeholder: "مثل: STC - باقة 5G غير محدودة"
+    validations:
+      required: true
