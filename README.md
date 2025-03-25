@@ -7,6 +7,9 @@
   <img src="https://img.shields.io/badge/Report%20a%20Problem-red?style=for-the-badge" alt="Report a Problem">
 </a>
 
+<div align="center">
+  <img src="https://img.shields.io/badge/OPEN-8A2BE2?color=cc5d4f" width="300" alt="OPEN">
+</div>
 
 ---
 
