@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/OPEN-8A2BE2?color=cc5d4f" width="300" alt="OPEN">
 </div>
 
-
+![صورة](https://raw.githubusercontent.com/nvkq/skipM/main/fonts.googleapis.com/1.png)
 
 ---
 
