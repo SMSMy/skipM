@@ -2,12 +2,12 @@
 [<img src="https://img.shields.io/badge/Version-2.1-blue" alt="Experimental">](https://nvkq.github.io/skipM/STC.html)
 
  [<img src="https://img.shields.io/badge/Status-Experimental-orange" alt="Experimental">](https://github.com/nvkq/skipM/?tab=readme-ov-file#%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85)
-
+ 
 <a href="https://github.com/nvkq/skipM/issues/new">
   <img src="https://img.shields.io/badge/Report%20a%20Problem-red?style=for-the-badge" alt="Report a Problem">
 </a>
 
-
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](https://unlicense.org)
 <div align="center">
    <a href="https://nvkq.github.io/skipM/STC.html">
   <img src="https://img.shields.io/badge/OPEN-8A2BE2?color=cc5d4f" width="300" alt="OPEN">
