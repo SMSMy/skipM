@@ -1,3 +1,5 @@
+# هذا المشروع خالٍ من الترخيص (Unlicense)
+
 This is free and unencumbered software released into the public domain.https://github.com/nvkq/skipM/tree/main
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
