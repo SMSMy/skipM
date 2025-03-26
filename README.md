@@ -1,4 +1,6 @@
 # تخطي تحديد سرعة الإنترنت (4G/5G) لشركات الاتصالات
+<img src="https://raw.githubusercontent.com/nvkq/skipM/main/fonts.googleapis.com/1.png" alt="صورة" width="200" />
+
 [<img src="https://img.shields.io/badge/Version-2.1-blue" alt="Experimental">](https://nvkq.github.io/skipM/STC.html)
 
  [<img src="https://img.shields.io/badge/Status-Experimental-orange" alt="Experimental">](https://github.com/nvkq/skipM/?tab=readme-ov-file#%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85)
@@ -13,7 +15,6 @@
   <img src="https://img.shields.io/badge/OPEN-8A2BE2?color=cc5d4f" width="300" alt="OPEN">
 </div>
 
-![صورة](https://raw.githubusercontent.com/nvkq/skipM/main/fonts.googleapis.com/1.png)
 
 ---
 
