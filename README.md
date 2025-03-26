@@ -1,6 +1,5 @@
 # تخطي تحديد سرعة الإنترنت (4G/5G) لشركات الاتصالات
-<!-- الصورة الرئيسية -->
-<!-- الصورة الرئيسية مربوطة بالرابط -->
+<meta name="google-site-verification" content="CQj3jfqhn4FOQryExK7Q2aNX7Ihxj2MngONVlGIC0u4" />
 <div align="center">
   <a href="https://github.com/nvkq/">
     <img src="https://raw.githubusercontent.com/nvkq/skipM/main/fonts.googleapis.com/1.png" alt="الصفحة الرئيسية" width="400" />
