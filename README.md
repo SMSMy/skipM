@@ -1,15 +1,36 @@
 # تخطي تحديد سرعة الإنترنت (4G/5G) لشركات الاتصالات
-<img src="https://raw.githubusercontent.com/nvkq/skipM/main/fonts.googleapis.com/1.png" alt="صورة" width="200" />
+<!-- الصورة الرئيسية -->
+<!-- الصورة الرئيسية مربوطة بالرابط -->
+<div align="center">
+  <a href="https://github.com/nvkq/">
+    <img src="https://raw.githubusercontent.com/nvkq/skipM/main/fonts.googleapis.com/1.png" alt="الصفحة الرئيسية" width="400" />
+  </a>
+</div>
 
-[<img src="https://img.shields.io/badge/Version-2.1-blue" alt="Experimental">](https://nvkq.github.io/skipM/STC.html)
-
- [<img src="https://img.shields.io/badge/Status-Experimental-orange" alt="Experimental">](https://github.com/nvkq/skipM/?tab=readme-ov-file#%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85)
- 
-<a href="https://github.com/nvkq/skipM/issues/new">
-  <img src="https://img.shields.io/badge/Report%20a%20Problem-red?style=for-the-badge" alt="Report a Problem">
-</a>
-
-[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](https://unlicense.org)
+<!-- الشارات (Badges) -->
+<div align="center" style="margin: 20px 0;">
+  <!-- شارة الإصدار -->
+  <a href="https://nvkq.github.io/skipM/STC.html">
+    <img src="https://img.shields.io/badge/Version-2.1-blue" alt="Version 2.1" style="margin: 0 10px;">
+  </a>
+  
+  <!-- شارة الحالة -->
+  <a href="https://github.com/nvkq/skipM/?tab=readme-ov-file#الاستخدام">
+    <img src="https://img.shields.io/badge/Status-Experimental-orange" alt="Experimental" style="margin: 0 10px;">
+  </a>
+  
+  <!-- زر الإبلاغ عن مشكلة -->
+  <a href="https://github.com/nvkq/skipM/issues/new">
+    <img src="https://img.shields.io/badge/Report%20a%20Problem-red?style=for-the-badge" alt="Report a Problem" style="margin: 0 5px;">
+  </a>
+  
+  <!-- شارة الترخيص -->
+  <a href="https://unlicense.org">
+    <img src="https://img.shields.io/badge/license-Unlicense-blue.svg" alt="Unlicense" style="margin: 0 10px;">
+  </a>
+  
+  
+</div>
 <div align="center">
    <a href="https://nvkq.github.io/skipM/STC.html">
   <img src="https://img.shields.io/badge/OPEN-8A2BE2?color=cc5d4f" width="300" alt="OPEN">
