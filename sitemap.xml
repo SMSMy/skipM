@@ -1,33 +1,32 @@
-<url>
-  <loc>https://nvkq.github.io/skipM/</loc>
-  <lastmod>2025-03-27T04:40:53+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://nvkq.github.io/skipM/STC.html</loc>
-  <lastmod>2025-03-27T04:40:53+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://nvkq.github.io/skipM/MOBILY.html</loc>
-  <lastmod>2025-03-27T04:40:53+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nvkq.github.io/skipM/ZAIN.html</loc>
-  <lastmod>2025-03-27T04:40:53+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nvkq.github.io/skipM/GO.html</loc>
-  <lastmod>2025-03-27T04:40:53+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nvkq.github.io/skipM/ITC.html</loc>
-  <lastmod>2025-03-27T04:40:53+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://github.com/smsmy/skipM/</loc>
+    <lastmod>2025-03-27T04:40:53+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://github.com/smsmy/skipM/STC.html</loc>
+    <lastmod>2025-03-27T04:40:53+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://github.com/smsmy/skipM/MOBILY.html</loc>
+    <lastmod>2025-03-27T04:40:53+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
+  <url>
+    <loc>https://github.com/smsmy/skipM/ZAIN.html</loc>
+    <lastmod>2025-03-27T04:40:53+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
+  <url>
+    <loc>https://github.com/smsmy/skipM/GO.html</loc>
+    <lastmod>2025-03-27T04:40:53+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
+  <url>
+    <loc>https://github.com/smsmy/skipM/ITC.html</loc>
+    <lastmod>2025-03-27T04:40:53+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
 </urlset>

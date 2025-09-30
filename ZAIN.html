@@ -231,7 +231,7 @@
         <i class="fab fa-telegram"></i> الدعم الفني
     </a>
     <!-- رابط GitHub الجديد -->
-    <a href="https://github.com/nvkq/skipM/" class="github-link ml-3" target="_blank">
+    <a href="https://github.com/smsmy/skipM" class="github-link ml-3" target="_blank">
         <i class="fab fa-github"></i> المشروع على GitHub
     </a>
 </footer>
@@ -244,8 +244,8 @@
     </div>
 
 
-      
-    
+
+
     </div>
 
     <script>
@@ -289,7 +289,7 @@
         async function checkServers() {
             const serverList = SERVERS.zain;
             const results = await Promise.allSettled(
-                serverList.map(server => 
+                serverList.map(server =>
                     fetch(server, { method: 'HEAD', mode: 'no-cors' })
                         .then(() => ({ server, status: 'success' }))
                         .catch(() => ({ server, status: 'failed' }))
@@ -305,7 +305,7 @@
 
         function updateServerList() {
             const list = document.getElementById('active-servers');
-            list.innerHTML = activeServers.map(server => 
+            list.innerHTML = activeServers.map(server =>
                 `<li class="list-group-item">${server}</li>`
             ).join('');
 
@@ -343,21 +343,21 @@
         }
 
         function toggleTheme() {
-            document.body.style.backgroundColor = 
-                document.body.style.backgroundColor === 'var(--bg-light)' 
-                ? 'var(--bg-dark)' 
+            document.body.style.backgroundColor =
+                document.body.style.backgroundColor === 'var(--bg-light)'
+                ? 'var(--bg-dark)'
                 : 'var(--bg-light)';
-            document.body.style.color = 
-                document.body.style.color === 'var(--text-dark)' 
-                ? 'var(--text-light)' 
+            document.body.style.color =
+                document.body.style.color === 'var(--text-dark)'
+                ? 'var(--text-light)'
                 : 'var(--text-dark)';
         }
 
         setInterval(() => {
             if (activeServers.length === 0) return;
             const server = activeServers[Math.floor(Math.random() * activeServers.length)];
-            fetch(server, { 
-                method: 'HEAD', 
+            fetch(server, {
+                method: 'HEAD',
                 mode: 'no-cors',
                 headers: { 'User-Agent': getRandomUserAgent() }
             });
