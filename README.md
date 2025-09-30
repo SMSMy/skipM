@@ -1,25 +1,25 @@
 # تخطي تحديد سرعة الإنترنت (4G/5G) لشركات الاتصالات
 <meta name="google-site-verification" content="CQj3jfqhn4FOQryExK7Q2aNX7Ihxj2MngONVlGIC0u4" />
 <div align="center">
-  <a href="https://github.com/nvkq/">
-    <img src="https://raw.githubusercontent.com/nvkq/skipM/main/fonts.googleapis.com/1.png" alt="الصفحة الرئيسية" width="400" />
+  <a href="https://github.com/smsmy/">
+    <img src="https://raw.githubusercontent.com/smsmy/skipM/main/fonts.googleapis.com/1.png" alt="الصفحة الرئيسية" width="400" />
   </a>
 </div>
 
 <!-- الشارات (Badges) -->
 <div align="center" style="margin: 20px 0;">
   <!-- شارة الإصدار -->
-  <a href="https://nvkq.github.io/skipM/STC.html">
+  <a href="https://smsmy.github.io/skipM/STC.html">
     <img src="https://img.shields.io/badge/Version-2.1-blue" alt="Version 2.1" style="margin: 0 10px;">
   </a>
   
   <!-- شارة الحالة -->
-  <a href="https://github.com/nvkq/skipM/?tab=readme-ov-file#الاستخدام">
+  <a href="https://github.com/smsmy/skipM/?tab=readme-ov-file#الاستخدام">
     <img src="https://img.shields.io/badge/Status-Experimental-orange" alt="Experimental" style="margin: 0 10px;">
   </a>
   
   <!-- زر الإبلاغ عن مشكلة -->
-  <a href="https://github.com/nvkq/skipM/issues/new">
+  <a href="https://github.com/smsmy/skipM/issues/new">
     <img src="https://img.shields.io/badge/Report%20a%20Problem-red?style=for-the-badge" alt="Report a Problem" style="margin: 0 5px;">
   </a>
   
@@ -31,7 +31,7 @@
   
 </div>
 <div align="center">
-   <a href="https://nvkq.github.io/skipM/STC.html">
+   <a href="https://smsmy.github.io/skipM/STC.html">
   <img src="https://img.shields.io/badge/OPEN-8A2BE2?color=cc5d4f" width="300" alt="OPEN">
 </div>
 
@@ -98,7 +98,7 @@
 ---
 
 ## **الاستخدام**  
-1. قم بزيارة الصفحة المُعدة مسبقًا (https://nvkq.github.io/skipM/).  
+1. قم بزيارة الصفحة المُعدة مسبقًا (https://smsmy.github.io/skipM/).  
 2. اترك الصفحة تعمل في الخلفية أثناء استخدام التطبيقات الأخرى.  
 
 > **تنويه:** النتائج تختلف حسب سياسات شركة الاتصالات ونوع الباقة.
